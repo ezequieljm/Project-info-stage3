@@ -1,19 +1,27 @@
 package com.info.groove.dto;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.info.groove.entity.Address;
 
 public class OrganizationDTO {
     
+    @NotEmpty
     private Long idOrg;
 
+    @NotEmpty
     private String email;
 
+    @NotEmpty
     private String orgName;
 
+    @NotEmpty
     private String phone;
 
+    @NotEmpty
     private String cuit;
 
+    @NotEmpty
     private String orgKey;
 
     private Address idAddress;

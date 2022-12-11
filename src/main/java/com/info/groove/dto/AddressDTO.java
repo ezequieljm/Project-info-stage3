@@ -1,17 +1,25 @@
 package com.info.groove.dto;
 
+import javax.validation.constraints.NotEmpty;
+
 public class AddressDTO {
     
+    @NotEmpty
     private Long idAddress;
 
+    @NotEmpty
     private String country;
 
+    @NotEmpty
     private String state;
 
+    @NotEmpty
     private String city;
 
+    @NotEmpty
     private String street;
 
+    @NotEmpty
     private int numStreet;
 
     public AddressDTO() {

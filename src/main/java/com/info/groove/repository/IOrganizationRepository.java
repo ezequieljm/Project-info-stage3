@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.info.groove.entity.Organization;
 
 @Repository
-public interface IOrganizationDao extends JpaRepository<Organization, Long>  {
+public interface IOrganizationRepository extends JpaRepository<Organization, Long>  {
 
     public Organization findByOrgName(String orgName);
 

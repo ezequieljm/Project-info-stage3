@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 import com.info.groove.entity.Address;
 
 @Repository
-public interface IAddressDao extends JpaRepository<Address, Long> {
-
-}
+public interface IAddressReposiroty extends JpaRepository<Address, Long> { }

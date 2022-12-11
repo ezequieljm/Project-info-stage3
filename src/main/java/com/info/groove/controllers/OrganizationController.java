@@ -4,9 +4,10 @@ package com.info.groove.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-// import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +43,13 @@ public class OrganizationController {
 		return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<OrganizationDTO> searchById(@PathVariable Long id) {
+        OrganizationDTO response = OrganizationMapper.entityToDTO(organizationService.findById(id));       
+        return new ResponseEntity<OrganizationDTO>(response, HttpStatus.OK);
+    }
+
+
     @GetMapping(value = "/org-name/{name}")
     public ResponseEntity<OrganizationDTO> searchByName(@PathVariable(value = "name") String orgName) {
         OrganizationDTO response = OrganizationMapper.entityToDTO(organizationService.findByOrganizationName(orgName));
@@ -57,7 +65,7 @@ public class OrganizationController {
 
 
     @PostMapping(value = "/")
-    public ResponseEntity<Map<String,Object>> registerOrganization(@RequestBody OrganizationDTO organizationDtoPost) throws Exception {
+    public ResponseEntity<Map<String,Object>> registerOrganization(@RequestBody @Valid OrganizationDTO organizationDtoPost) {
 
         Map<String,Object> response = new HashMap<>();
         OrganizationDTO newOrganization = organizationService.save(organizationDtoPost);
@@ -68,7 +76,7 @@ public class OrganizationController {
 
     @PutMapping(value = "/update/{key}")
     public ResponseEntity<Map<String,Object>> updateOrganization(
-        @RequestBody OrganizationDTO organizationDTO, 
+        @RequestBody @Valid OrganizationDTO organizationDTO, 
         @PathVariable String key
         ) {
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity(name = "address")
@@ -12,7 +13,7 @@ public class Address {
     /*
      * Attributes
      */
-    @javax.persistence.Id
+    @Id
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_address")
     private Long idAddress;

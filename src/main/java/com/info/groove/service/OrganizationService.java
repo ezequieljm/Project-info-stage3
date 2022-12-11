@@ -9,53 +9,59 @@ import org.springframework.stereotype.Service;
 import com.info.groove.dto.OrganizationDTO;
 import com.info.groove.entity.Address;
 import com.info.groove.entity.Organization;
+import com.info.groove.exceptions.OrganizationNotFoundException;
 import com.info.groove.mapper.OrganizationMapper;
-import com.info.groove.repository.IAddressDao;
-import com.info.groove.repository.IOrganizationDao;
+import com.info.groove.repository.IAddressReposiroty;
+import com.info.groove.repository.IOrganizationRepository;
 
 @Service
 public class OrganizationService implements IOrganizationService {
 
 
     @Autowired
-    private IOrganizationDao organizationDao;
+    private IOrganizationRepository organizationRepository;
 
     @Autowired
-    private IAddressDao addressDao;
+    private IAddressReposiroty addressReposotory;
 
     @Override
     public Organization findByOrganizationName(String orgName) {
-        return organizationDao.findByOrgName(orgName);
+        Organization org = organizationRepository.findByOrgName(orgName);
+        if (org == null) {
+            throw new OrganizationNotFoundException(String.format("Organization with name %s not found", orgName));
+        }
+
+        return org;
     }
 
     @Override
     public List<Organization> getAllOrganizations() {
-        return organizationDao.findAll();
+        return organizationRepository.findAll();
     }
 
     @Override
     public Organization findByOrganizationCuit(String orgCuit) {
-        return organizationDao.findByCuit(orgCuit);
+        return organizationRepository.findByCuit(orgCuit);
     }
 
     @Override
     public OrganizationDTO save(OrganizationDTO org) {
         Organization organization = OrganizationMapper.dtoToEntity(org);
         Address addressOfOrg = organization.getIdAddress();
-        addressOfOrg = addressDao.save(addressOfOrg);
-        organization = organizationDao.save(organization);
+        addressOfOrg = addressReposotory.save(addressOfOrg);
+        organization = organizationRepository.save(organization);
         org = OrganizationMapper.entityToDTO(organization);
         return org;
     }
 
     @Override
     public void deleteOrganization(Long id, String key) {
-        Optional<Organization> maybeOrg = organizationDao.findById(id);
+        Optional<Organization> maybeOrg = organizationRepository.findById(id);
 
         if (maybeOrg.isPresent()) {
             Organization org = maybeOrg.get();
             if (org.getOrgKey().equals(key)) {
-                organizationDao.deleteById(id);
+                organizationRepository.deleteById(id);
             }
         }
         // if not present the organization
@@ -67,8 +73,8 @@ public class OrganizationService implements IOrganizationService {
         if (org.getOrgKey().equals(key)) {
             Organization organization = OrganizationMapper.dtoToEntity(org);
             Address addressOfOrg = organization.getIdAddress();
-            addressOfOrg = addressDao.save(addressOfOrg);
-            organization = organizationDao.save(organization);
+            addressOfOrg = addressReposotory.save(addressOfOrg);
+            organization = organizationRepository.save(organization);
             org = OrganizationMapper.entityToDTO(organization);
             return org;
         }
@@ -77,5 +83,12 @@ public class OrganizationService implements IOrganizationService {
         return org;
     }
 
+    public Organization findById(Long id) {
+        return organizationRepository.findById(id)
+            .orElseThrow(
+                () -> new OrganizationNotFoundException(String.format("Organization with id %d not found", id))
+            );
+        
+    }
   
 }
