@@ -11,10 +11,10 @@ public class OrganizationMapper {
 
         Organization foo = new Organization();
 
-        foo.setIdOrg(orgDto.getIdOrg());
+        foo.setOrgId(orgDto.getOrgId());
         foo.setCuit(orgDto.getCuit());
         foo.setEmail(orgDto.getEmail());
-        foo.setIdAddress(orgDto.getIdAddress());
+        foo.setAddressId(orgDto.getAddressId());
         foo.setOrgName(orgDto.getOrgName());
         foo.setOrgKey(orgDto.getOrgKey());
         foo.setPhone(orgDto.getPhone());
@@ -30,10 +30,10 @@ public class OrganizationMapper {
 
         OrganizationDTO foo = new OrganizationDTO();
 
-        foo.setIdOrg(organization.getIdOrg());
+        foo.setOrgId(organization.getOrgId());
         foo.setCuit(organization.getCuit());
         foo.setEmail(organization.getEmail());
-        foo.setIdAddress(organization.getIdAddress());
+        foo.setAddressId(organization.getAddressId());
         foo.setOrgName(organization.getOrgName());
         foo.setOrgKey(organization.getOrgKey());
         foo.setPhone(organization.getPhone());

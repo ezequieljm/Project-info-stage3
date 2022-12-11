@@ -5,7 +5,7 @@ import javax.validation.constraints.NotEmpty;
 public class AddressDTO {
     
     @NotEmpty
-    private Long idAddress;
+    private Long addressId;
 
     @NotEmpty
     private String country;
@@ -20,26 +20,26 @@ public class AddressDTO {
     private String street;
 
     @NotEmpty
-    private int numStreet;
+    private int streetNumber;
 
     public AddressDTO() {
     }
 
-    public AddressDTO(Long idAddress, String country, String state, String city, String street, int numStreet) {
-        this.idAddress = idAddress;
+    public AddressDTO(Long addressId, String country, String state, String city, String street, int streetNumber) {
+        this.addressId = addressId;
         this.country = country;
         this.state = state;
         this.city = city;
         this.street = street;
-        this.numStreet = numStreet;
+        this.streetNumber = streetNumber;
     }
 
-    public Long getIdAddress() {
-        return idAddress;
+    public Long getAddressId() {
+        return addressId;
     }
 
-    public void setIdAddress(Long idAddress) {
-        this.idAddress = idAddress;
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
     }
 
     public String getCountry() {
@@ -74,12 +74,12 @@ public class AddressDTO {
         this.street = street;
     }
 
-    public int getNumStreet() {
-        return numStreet;
+    public int getStreetNumber() {
+        return streetNumber;
     }
 
-    public void setNumStreet(int numStreet) {
-        this.numStreet = numStreet;
+    public void setStreetNumber(int streetNumber) {
+        this.streetNumber = streetNumber;
     }
 
 }

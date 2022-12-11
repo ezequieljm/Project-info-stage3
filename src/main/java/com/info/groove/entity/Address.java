@@ -15,8 +15,8 @@ public class Address {
      */
     @Id
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_address")
-    private Long idAddress;
+    @Column(name = "address_id")
+    private Long addressId;
 
     @Column(name = "country")
     private String country;
@@ -30,10 +30,10 @@ public class Address {
     @Column(name = "street")
     private String street;
 
-    @Column(name = "num_street")
-    private int numStreet;
+    @Column(name = "street_number")
+    private int streetNumber;
 
-    @OneToOne(mappedBy = "idAddress")
+    @OneToOne(mappedBy = "addressId")
     private Organization organization;
 
     /*
@@ -43,23 +43,23 @@ public class Address {
     public Address() {
     }
 
-    public Address(String country, String state, String city, String street, int numStreet) {
+    public Address(String country, String state, String city, String street, int streetNumber) {
         this.country = country;
         this.state = state;
         this.city = city;
         this.street = street;
-        this.numStreet = numStreet;
+        this.streetNumber = streetNumber;
     }
 
     /*
      * Getters and Setters
      */
-    public Long getIdAddress() {
-        return idAddress;
+    public Long getAddressId() {
+        return addressId;
     }
 
-    public void setIdAddress(Long idAddress) {
-        this.idAddress = idAddress;
+    public void setAddressId(Long addressId) {
+        this.addressId = addressId;
     }
 
     public String getCountry() {
@@ -94,12 +94,12 @@ public class Address {
         this.street = street;
     }
 
-    public int getNumStreet() {
-        return numStreet;
+    public int getStreetNumber() {
+        return streetNumber;
     }
 
-    public void setNumStreet(int numStreet) {
-        this.numStreet = numStreet;
+    public void setStreetNumber(int streetNumber) {
+        this.streetNumber = streetNumber;
     }
 
     @JsonBackReference

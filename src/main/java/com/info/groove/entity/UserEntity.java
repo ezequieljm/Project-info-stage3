@@ -7,16 +7,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name = "users")
-public class User {
+public class UserEntity {
+
     /*
      * Attributes
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUser;
+    @Column(name = "user_id")
+    private Long userId;
 
-    @Column(name = "key_person")
-    private String keyUser;
+    @Column(name = "user_key")
+    private String userKey;
 
     @Column(name = "firstname")
     private String firstname;
@@ -24,7 +26,7 @@ public class User {
     @Column(name = "lastname")
     private String lastname;
 
-    @Column(name = "person_status")
+    @Column(name = "user_status")
     private boolean userStatus;
 
     @Column(name = "dni")
@@ -33,32 +35,36 @@ public class User {
     /*
      * Constructors
      */
-    public User() {
+    public UserEntity() {
     }
 
-    public User(Long idUser, String keyUser, String firstname, String lastname, boolean userStatus, int dni) {
-        this.idUser = idUser;
-        this.keyUser = keyUser;
+    public UserEntity(Long userId, String userKey, String firstname, String lastname, boolean userStatus, int dni) {
+        this.userId = userId;
+        this.userKey = userKey;
         this.firstname = firstname;
         this.lastname = lastname;
         this.userStatus = userStatus;
         this.dni = dni;
     }
 
-    public Long getIdUser() {
-        return idUser;
+
+    /*
+     * Getters and Setters
+     */
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    public void setUserId(Long idUser) {
+        this.userId = idUser;
     }
 
-    public String getKeyUser() {
-        return keyUser;
+    public String getUserKey() {
+        return userKey;
     }
 
-    public void setKeyUser(String keyUser) {
-        this.keyUser = keyUser;
+    public void setUserKey(String userKey) {
+        this.userKey = userKey;
     }
 
     public String getFirstname() {
@@ -93,8 +99,5 @@ public class User {
         this.dni = dni;
     }
 
-    /*
-     * Getters and Setters
-     */
 
 }

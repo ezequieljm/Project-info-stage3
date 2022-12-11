@@ -18,14 +18,15 @@ public class Event {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEvent;
+    @Column(name = "event_id")
+    private Long eventId;
 
     @ManyToOne
-    @JoinColumn(name = "id_org")
+    @JoinColumn(name = "org_id")
     private Organization organization;
 
     @ManyToOne
-    @JoinColumn(name = "id_address")
+    @JoinColumn(name = "address_id")
     private Address address;
 
     @Column(name = "event_name")
@@ -54,12 +55,12 @@ public class Event {
     /*
      * Getters and Setters
      */
-    public Long getIdEvent() {
-        return idEvent;
+    public Long getEventId() {
+        return eventId;
     }
 
-    public void setIdEvent(Long idEvent) {
-        this.idEvent = idEvent;
+    public void setEventId(Long eventId) {
+        this.eventId = eventId;
     }
 
     public Organization getOrganization() {

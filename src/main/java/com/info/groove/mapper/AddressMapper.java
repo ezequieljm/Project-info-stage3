@@ -11,10 +11,10 @@ public class AddressMapper {
 
         Address foo = new Address();
 
-        foo.setIdAddress(addressDto.getIdAddress());
+        foo.setAddressId(addressDto.getAddressId());
         foo.setCountry(addressDto.getCountry());
         foo.setCity(addressDto.getCity());
-        foo.setNumStreet(addressDto.getNumStreet());
+        foo.setStreetNumber(addressDto.getStreetNumber());
         foo.setState(addressDto.getState());
         foo.setStreet(addressDto.getStreet());
 
@@ -29,10 +29,10 @@ public class AddressMapper {
 
         AddressDTO foo = new AddressDTO();
 
-        foo.setIdAddress(address.getIdAddress());
+        foo.setAddressId(address.getAddressId());
         foo.setCountry(address.getCountry());
         foo.setCity(address.getCity());
-        foo.setNumStreet(address.getNumStreet());
+        foo.setStreetNumber(address.getStreetNumber());
         foo.setState(address.getState());
         foo.setStreet(address.getStreet());
 

@@ -7,7 +7,7 @@ import com.info.groove.entity.Address;
 public class OrganizationDTO {
     
     @NotEmpty
-    private Long idOrg;
+    private Long orgId;
 
     @NotEmpty
     private String email;
@@ -24,28 +24,28 @@ public class OrganizationDTO {
     @NotEmpty
     private String orgKey;
 
-    private Address idAddress;
+    private Address addressId;
 
     public OrganizationDTO() {
     }
 
-    public OrganizationDTO(Long idOrg, String email, String orgName, String phone, String cuit, String orgKey,
-            Address idAddress) {
-        this.idOrg = idOrg;
+    public OrganizationDTO(Long orgId, String email, String orgName, String phone, String cuit, String orgKey,
+            Address addressId) {
+        this.orgId = orgId;
         this.email = email;
         this.orgName = orgName;
         this.phone = phone;
         this.cuit = cuit;
         this.orgKey = orgKey;
-        this.idAddress = idAddress;
+        this.addressId = addressId;
     }
 
-    public Long getIdOrg() {
-        return idOrg;
+    public Long getOrgId() {
+        return orgId;
     }
 
-    public void setIdOrg(Long idOrg) {
-        this.idOrg = idOrg;
+    public void setOrgId(Long orgId) {
+        this.orgId = orgId;
     }
 
     public String getEmail() {
@@ -88,12 +88,12 @@ public class OrganizationDTO {
         this.orgKey = orgKey;
     }
 
-    public Address getIdAddress() {
-        return idAddress;
+    public Address getAddressId() {
+        return addressId;
     }
 
-    public void setIdAddress(Address idAddress) {
-        this.idAddress = idAddress;
+    public void setAddressId(Address addressId) {
+        this.addressId = addressId;
     }
 
 }

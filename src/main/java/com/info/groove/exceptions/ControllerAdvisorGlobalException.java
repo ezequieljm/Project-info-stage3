@@ -30,6 +30,15 @@ public class ControllerAdvisorGlobalException extends ResponseEntityExceptionHan
         return new ResponseEntity<>(body,HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(OrganizationKeyNotEqual.class)
+    public ResponseEntity<Object> handleOrganizationKeyNotEqual(OrganizationKeyNotEqual ex, WebRequest request) {
+        
+        Map<String,Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("message", ex.getMessage());
+        return new ResponseEntity<Object>(body,HttpStatus.NOT_FOUND);
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
             HttpHeaders headers, HttpStatus status, WebRequest request) {

@@ -16,8 +16,8 @@ public class Organization {
      */
     @Id
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_org")
-    private Long idOrg;
+    @Column(name = "org_id")
+    private Long orgId;
 
     @Column(name = "email")
     private String email;
@@ -35,19 +35,19 @@ public class Organization {
     private String orgKey;
 
     @OneToOne
-    @JoinColumn(name = "id_address")
-    private Address idAddress;
+    @JoinColumn(name = "address_id")
+    private Address addressId;
 
     /*
      * Constructors
      */
-    public Organization(String email, String orgName, String phone, String cuit, String orgKey, Address idAddress) {
+    public Organization(String email, String orgName, String phone, String cuit, String orgKey, Address addressId) {
         this.email = email;
         this.orgName = orgName;
         this.phone = phone;
         this.cuit = cuit;
         this.orgKey = orgKey;
-        this.idAddress = idAddress;
+        this.addressId = addressId;
     }
 
     public Organization() {
@@ -58,16 +58,16 @@ public class Organization {
      */
 
     @JsonManagedReference
-    public Address getIdAddress() {
-        return idAddress;
+    public Address getAddressId() {
+        return addressId;
     }
 
-    public Long getIdOrg() {
-        return idOrg;
+    public Long getOrgId() {
+        return orgId;
     }
 
-    public void setIdOrg(Long idOrg) {
-        this.idOrg = idOrg;
+    public void setOrgId(Long orgId) {
+        this.orgId = orgId;
     }
 
     public String getEmail() {
@@ -110,7 +110,7 @@ public class Organization {
         this.orgKey = orgKey;
     }
 
-    public void setIdAddress(Address idAddress) {
-        this.idAddress = idAddress;
+    public void setAddressId(Address idAddress) {
+        this.addressId = idAddress;
     }
 }
