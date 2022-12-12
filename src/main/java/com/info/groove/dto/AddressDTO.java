@@ -4,7 +4,7 @@ import javax.validation.constraints.NotEmpty;
 
 public class AddressDTO {
     
-    @NotEmpty
+    // @NotEmpty
     private Long addressId;
 
     @NotEmpty

@@ -39,6 +39,20 @@ public class ControllerAdvisorGlobalException extends ResponseEntityExceptionHan
         return new ResponseEntity<Object>(body,HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Object> handleUserNotFound(
+            UserNotFoundException ex,
+            WebRequest request,
+            HttpStatus status
+    ){
+
+        Map<String,Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", status.value());
+        body.put("message", ex.getMessage());
+        return new ResponseEntity<Object>(body,HttpStatus.NOT_FOUND);
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
             HttpHeaders headers, HttpStatus status, WebRequest request) {

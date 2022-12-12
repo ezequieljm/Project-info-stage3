@@ -78,7 +78,7 @@ public class OrganizationController {
     public ResponseEntity<Map<String,Object>> updateOrganization(
         @RequestBody @Valid OrganizationDTO organizationDTO, 
         @PathVariable String key
-        ) {
+    ) {
 
         Map<String,Object> response = new HashMap<>();
         OrganizationDTO updateOrganization = organizationService.updateOrg(organizationDTO, key);

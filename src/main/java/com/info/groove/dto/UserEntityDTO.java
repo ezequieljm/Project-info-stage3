@@ -1,44 +1,30 @@
-package com.info.groove.entity;
+package com.info.groove.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-@Entity(name = "users")
-public class UserEntity {
+import javax.validation.constraints.NotEmpty;
 
-    /*
-     * Attributes
-     */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+public class UserEntityDTO {
+
     private Long userId;
 
-    @Column(name = "user_key")
+    @NotEmpty
     private String userKey;
 
-    @Column(name = "firstname")
+    @NotEmpty
     private String firstname;
 
-    @Column(name = "lastname")
+    @NotEmpty
     private String lastname;
 
-    @Column(name = "user_status")
+    @NotEmpty
     private boolean userStatus;
 
-    @Column(name = "dni")
+    @NotEmpty
     private int dni;
 
-    /*
-     * Constructors
-     */
-    public UserEntity() {
-    }
+    public UserEntityDTO() { }
 
-    public UserEntity(Long userId, String userKey, String firstname, String lastname, boolean userStatus, int dni) {
+    public UserEntityDTO(Long userId, String userKey, String firstname, String lastname, boolean userStatus, int dni) {
         this.userId = userId;
         this.userKey = userKey;
         this.firstname = firstname;
@@ -47,16 +33,12 @@ public class UserEntity {
         this.dni = dni;
     }
 
-
-    /*
-     * Getters and Setters
-     */
     public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long idUser) {
-        this.userId = idUser;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUserKey() {
@@ -83,7 +65,7 @@ public class UserEntity {
         this.lastname = lastname;
     }
 
-    public boolean getUserStatus() {
+    public boolean isUserStatus() {
         return userStatus;
     }
 
@@ -98,6 +80,4 @@ public class UserEntity {
     public void setDni(int dni) {
         this.dni = dni;
     }
-
-
 }

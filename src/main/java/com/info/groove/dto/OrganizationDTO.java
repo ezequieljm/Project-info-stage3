@@ -6,7 +6,7 @@ import com.info.groove.entity.Address;
 
 public class OrganizationDTO {
     
-    @NotEmpty
+    // @NotEmpty
     private Long orgId;
 
     @NotEmpty
