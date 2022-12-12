@@ -6,7 +6,7 @@ import com.info.groove.entity.UserEntity;
 import java.util.Date;
 import javax.validation.constraints.NotEmpty;
 
-public class TurnDTO {
+public class RecurrentEventTurnDTO {
 
 
     // Attrubuttes
@@ -19,10 +19,7 @@ public class TurnDTO {
     private UserEntity userId;
 
     @NotEmpty
-    private Date turnDateHour;
-
-    @NotEmpty
-    private String alfaCode;
+    private Date turnDateTime;
 
     @NotEmpty
     private boolean turnStatus;
@@ -30,18 +27,15 @@ public class TurnDTO {
 
 
     // Contructors
-    public TurnDTO() { }
+    public RecurrentEventTurnDTO() { }
 
-    public TurnDTO(Long turnId, Event eventId, UserEntity userId, Date turnDateHour, String alfaCode, boolean turnStatus) {
+    public RecurrentEventTurnDTO(Long turnId, Event eventId, UserEntity userId, Date turnDateTime, boolean turnStatus) {
         this.turnId = turnId;
         this.eventId = eventId;
         this.userId = userId;
-        this.turnDateHour = turnDateHour;
-        this.alfaCode = alfaCode;
+        this.turnDateTime = turnDateTime;
         this.turnStatus = turnStatus;
     }
-
-
 
 
     // Getters and setters
@@ -71,23 +65,15 @@ public class TurnDTO {
         this.userId = userId;
     }
 
-    public Date getTurnDateHour() {
-        return turnDateHour;
+    public Date getTurnDateTime() {
+        return turnDateTime;
     }
 
-    public void setTurnDateHour(Date turnDateHour) {
-        this.turnDateHour = turnDateHour;
+    public void setTurnDateTime(Date turnDateTime) {
+        this.turnDateTime = turnDateTime;
     }
 
-    public String getAlfaCode() {
-        return alfaCode;
-    }
-
-    public void setAlfaCode(String alfaCode) {
-        this.alfaCode = alfaCode;
-    }
-
-    public boolean isTurnStatus() {
+    public boolean getTurnStatus() {
         return turnStatus;
     }
 

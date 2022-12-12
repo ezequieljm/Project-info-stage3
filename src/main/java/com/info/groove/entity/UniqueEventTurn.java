@@ -1,21 +1,12 @@
 package com.info.groove.entity;
 
+import javax.persistence.*;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+@Entity(name = "unique_event_turns")
+public class UniqueEventTurn {
 
-@Entity(name = "turns")
-public class Turn {
-    /*
-     * Attributes
-     */
-
+    //Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "turn_id")
@@ -29,34 +20,28 @@ public class Turn {
     @JoinColumn(name = "user_id")
     private UserEntity userId;
 
-    @Column(name = "turn_date_hour")
-    private Date turnDateHour;
-
-    @Column(name = "alfa_code")
-    private String alfaCode;
+    @Column(name = "turn_date")
+    private Date turnDate;
 
     @Column(name = "turn_status")
     private boolean turnStatus;
 
-    /*
-     * Constructos
-     */
-    public Turn() {
-    }
+    @Column(name = "key_value")
+    private String keyValue;
 
-    public Turn(Long turnId, Event eventId, UserEntity userId, Date turnDateHour, String alfaCode,
-            boolean turnStatus) {
+    //Contructors
+    public UniqueEventTurn() { }
+
+    public UniqueEventTurn(Long turnId, Event eventId, UserEntity userId, Date turnDate, boolean turnStatus, String keyValue) {
         this.turnId = turnId;
         this.eventId = eventId;
         this.userId = userId;
-        this.turnDateHour = turnDateHour;
-        this.alfaCode = alfaCode;
+        this.turnDate = turnDate;
         this.turnStatus = turnStatus;
+        this.keyValue = keyValue;
     }
 
-    /*
-     * Getters and Setters
-     */
+    // Getters and Setters
     public Long getTurnId() {
         return turnId;
     }
@@ -81,23 +66,15 @@ public class Turn {
         this.userId = userId;
     }
 
-    public Date getTurnDateHour() {
-        return turnDateHour;
+    public Date getTurnDate() {
+        return turnDate;
     }
 
-    public void setTurnDateHour(Date turnDateHour) {
-        this.turnDateHour = turnDateHour;
+    public void setTurnDate(Date turnDate) {
+        this.turnDate = turnDate;
     }
 
-    public String getAlfaCode() {
-        return alfaCode;
-    }
-
-    public void setAlfaCode(String alfaCode) {
-        this.alfaCode = alfaCode;
-    }
-
-    public boolean isTurnStatus() {
+    public boolean getTurnStatus() {
         return turnStatus;
     }
 
@@ -105,4 +82,11 @@ public class Turn {
         this.turnStatus = turnStatus;
     }
 
+    public String getKeyValue() {
+        return keyValue;
+    }
+
+    public void setKeyValue(String keyValue) {
+        this.keyValue = keyValue;
+    }
 }

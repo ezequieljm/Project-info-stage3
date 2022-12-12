@@ -25,16 +25,20 @@ public class EventDTO {
     @NotEmpty
     private Date creationDate;
 
+    @NotEmpty
+    private String eventType;
+
     public EventDTO() { }
 
 
-    public EventDTO(Long eventId, Organization organization, Address address, String eventName, boolean eventStatus, Date creationDate) {
+    public EventDTO(Long eventId, Organization organization, Address address, String eventName, boolean eventStatus, Date creationDate, String eventType) {
         this.eventId = eventId;
         this.organization = organization;
         this.address = address;
         this.eventName = eventName;
         this.eventStatus = eventStatus;
         this.creationDate = creationDate;
+        this.eventType = eventType;
     }
 
     public Long getEventId() {
@@ -69,7 +73,7 @@ public class EventDTO {
         this.eventName = eventName;
     }
 
-    public boolean isEventStatus() {
+    public boolean getEventStatus() {
         return eventStatus;
     }
 
@@ -83,5 +87,13 @@ public class EventDTO {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
     }
 }

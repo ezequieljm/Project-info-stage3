@@ -38,18 +38,22 @@ public class Event {
     @Column(name = "creation_date")
     private Date creationDate;
 
+    @Column(name = "event_type")
+    private String eventType;
+
     /*
      * Constructors
      */
     public Event() {
     }
 
-    public Event(Organization organization, Address address, String eventName, boolean eventStatus, Date creationDate) {
+    public Event(Organization organization, Address address, String eventName, boolean eventStatus, Date creationDate, String eventType) {
         this.organization = organization;
         this.address = address;
         this.eventName = eventName;
         this.eventStatus = eventStatus;
         this.creationDate = creationDate;
+        this.eventType = eventType;
     }
 
     /*
@@ -103,4 +107,11 @@ public class Event {
         this.creationDate = creationDate;
     }
 
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
 }
