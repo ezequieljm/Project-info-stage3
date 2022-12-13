@@ -12,7 +12,7 @@ import com.info.groove.entity.Organization;
 import com.info.groove.exceptions.OrganizationKeyNotEqual;
 import com.info.groove.exceptions.OrganizationNotFoundException;
 import com.info.groove.mapper.OrganizationMapper;
-import com.info.groove.repository.IAddressReposiroty;
+import com.info.groove.repository.IAddressRepository;
 import com.info.groove.repository.IOrganizationRepository;
 
 @Service
@@ -23,7 +23,7 @@ public class OrganizationService implements IOrganizationService {
     private IOrganizationRepository organizationRepository;
 
     @Autowired
-    private IAddressReposiroty addressReposotory;
+    private IAddressRepository addressReposotory;
 
     @Override
     public Organization findByOrganizationName(String orgName) {

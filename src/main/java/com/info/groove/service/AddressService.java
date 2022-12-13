@@ -6,13 +6,13 @@ import org.springframework.stereotype.Service;
 import com.info.groove.dto.AddressDTO;
 import com.info.groove.entity.Address;
 import com.info.groove.mapper.AddressMapper;
-import com.info.groove.repository.IAddressReposiroty;
+import com.info.groove.repository.IAddressRepository;
 
 @Service
 public class AddressService implements IAddressService {
 
     @Autowired
-    private IAddressReposiroty addressReposotory;
+    private IAddressRepository addressReposotory;
 
     @Override
     public AddressDTO save(AddressDTO address) {
