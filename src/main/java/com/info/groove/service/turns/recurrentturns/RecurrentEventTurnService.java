@@ -152,15 +152,18 @@ public class RecurrentEventTurnService implements IRecurrentEventTurnService {
     }
 
     @Override
-    public void deleteRecurrentEventTurn(Long recTurnId) throws TurnNofFoundException {
+    public RecurrentEventTurnDTO deleteRecurrentEventTurn(Long recTurnId, String key) throws TurnNofFoundException {
         // We verify if turn exists
 
         // Long recTurnId = recurrentEventTurnDTO.getTurnId();
         Optional<RecurrentEventTurn> maybeTurn = recurrentEventTurnRepository.findById(recTurnId);
         if (maybeTurn.isEmpty()) throw new TurnNofFoundException("Turn not exists");
 
-        // We delete the turn
-        recurrentEventTurnRepository.deleteById(recTurnId);
+        // We delete the turn of logic form
+        RecurrentEventTurn originalTurn = maybeTurn.get();
+        originalTurn.setTurnStatus(false);
+        RecurrentEventTurn newTurn = recurrentEventTurnRepository.save(originalTurn);
+        return RecurrentEventTurnMapper.entityToDto(newTurn);
     }
 
     @Override

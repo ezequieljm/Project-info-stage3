@@ -34,6 +34,9 @@ public class Organization {
     @Column(name = "org_key")
     private String orgKey;
 
+    @Column(name = "org_status")
+    private boolean orgStatus;
+
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address addressId;
@@ -41,12 +44,13 @@ public class Organization {
     /*
      * Constructors
      */
-    public Organization(String email, String orgName, String phone, String cuit, String orgKey, Address addressId) {
+    public Organization(String email, String orgName, String phone, String cuit, String orgKey, boolean orgStatus, Address addressId) {
         this.email = email;
         this.orgName = orgName;
         this.phone = phone;
         this.cuit = cuit;
         this.orgKey = orgKey;
+        this.orgStatus = orgStatus;
         this.addressId = addressId;
     }
 
@@ -110,7 +114,16 @@ public class Organization {
         this.orgKey = orgKey;
     }
 
+    public boolean getOrgStatus() {
+        return orgStatus;
+    }
+
+    public void setOrgStatus(boolean orgStatus) {
+        this.orgStatus = orgStatus;
+    }
+
     public void setAddressId(Address idAddress) {
         this.addressId = idAddress;
     }
+
 }

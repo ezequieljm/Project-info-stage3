@@ -73,7 +73,7 @@ public class UniqueEventTurnController {
     }
 
     //Logic delete
-    @PutMapping(value = "/{id}/{orgKey}")
+    @PutMapping(value = "/delete/{id}/{orgKey}")
     public ResponseEntity<Map<String,Object>> deleteTurn(
             @PathVariable Long id,
             @PathVariable String orgKey

@@ -2,6 +2,7 @@ package com.info.groove.service;
 
 import com.info.groove.dto.UserEntityDTO;
 import com.info.groove.entity.UserEntity;
+import com.info.groove.exceptions.UserNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,6 @@ public interface IUserEntityService {
 
     public UserEntityDTO updateUserEntity(UserEntity user, String key);
 
-    public void deleteUserEntity(Long id, String key);
+    public UserEntityDTO deleteUserEntity(Long id, String key) throws UserNotFoundException;
 
 }

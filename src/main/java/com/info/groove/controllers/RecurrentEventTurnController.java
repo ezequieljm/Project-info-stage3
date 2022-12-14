@@ -69,12 +69,24 @@ public class RecurrentEventTurnController {
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Map<String,Object>> deleteTurn(@PathVariable Long id) {
+//    @DeleteMapping(value = "/{id}")
+//    public ResponseEntity<Map<String,Object>> deleteTurn(@PathVariable Long id) {
+//        Map<String,Object> response = new HashMap<String,Object>();
+//        recurrentEventTurnService.deleteRecurrentEventTurn(id);
+//        response.put("Updated Turn", null);
+//        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
+//    }
+
+
+    // Logical deletion
+    @PutMapping(value = "/delete/{id}/{orgKey}")
+    public ResponseEntity<Map<String,Object>> deleteTurn(
+            @PathVariable Long id,
+            @PathVariable String key
+    ) {
         Map<String,Object> response = new HashMap<String,Object>();
-        recurrentEventTurnService.deleteRecurrentEventTurn(id);
-        response.put("Updated Turn", null);
+        RecurrentEventTurnDTO turn = recurrentEventTurnService.deleteRecurrentEventTurn(id,key);
+        response.put("Updated Turn", turn);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
-
 }

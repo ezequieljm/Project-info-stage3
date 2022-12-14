@@ -16,5 +16,5 @@ public interface IEventService {
 
     public List<Event> getAllEventsByOrganization(Long orgId) throws OrganizationNotFoundException;
 
-    public void deleteEvent(Long eventId, String key) throws EventNotFoundException;
+    public EventDTO deleteEvent(Long eventId, String key) throws EventNotFoundException, OrganizationKeyNotEqual;
 }

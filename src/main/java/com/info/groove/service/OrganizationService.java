@@ -61,7 +61,7 @@ public class OrganizationService implements IOrganizationService {
     }
 
     @Override
-    public void deleteOrganization(Long id, String key) {
+    public OrganizationDTO deleteOrganization(Long id, String key) {
         Optional<Organization> maybeOrg = organizationRepository.findById(id);
 
         if (!maybeOrg.isPresent()) 
@@ -71,10 +71,14 @@ public class OrganizationService implements IOrganizationService {
 
         Organization org = maybeOrg.get();
 
-        if (!org.getOrgKey().equals(key)) throw new OrganizationKeyNotEqual(key);
+        if (!org.getOrgKey().equals(key))
+            throw new OrganizationKeyNotEqual(key);
 
-        organizationRepository.deleteById(id);
+//        organizationRepository.deleteById(id);
 
+        org.setOrgStatus(false);
+        OrganizationDTO orgDto = OrganizationMapper.entityToDTO(organizationRepository.save(org));
+        return orgDto;
     }
 
     @Override

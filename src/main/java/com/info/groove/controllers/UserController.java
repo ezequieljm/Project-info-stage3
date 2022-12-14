@@ -110,11 +110,24 @@ public class UserController {
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/{id}/{key}")
-    public ResponseEntity<Map<String,Object>> deleteUser(@PathVariable Long id, @PathVariable String key) {
+//    @DeleteMapping(value = "/{id}/{key}")
+//    public ResponseEntity<Map<String,Object>> deleteUser(@PathVariable Long id, @PathVariable String key) {
+//        Map<String,Object> response = new HashMap<>();
+//        userEntityService.deleteUserEntity(id,key);
+//        response.put(String.format("User with id %s deleted", id), null);
+//        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
+//    }
+
+
+    // Logical deletion
+    @PutMapping(value = "/delete/{id}/{key}")
+    public ResponseEntity<Map<String,Object>> deleteUser(
+            @PathVariable Long id,
+            @PathVariable String key
+    ) {
         Map<String,Object> response = new HashMap<>();
-        userEntityService.deleteUserEntity(id,key);
-        response.put(String.format("User with id %s deleted", id), null);
+        UserEntityDTO userDto = userEntityService.deleteUserEntity(id,key);
+        response.put(String.format("User with id %s deleted", id), userDto);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 

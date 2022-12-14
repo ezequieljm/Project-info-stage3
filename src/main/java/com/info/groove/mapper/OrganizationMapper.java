@@ -18,6 +18,7 @@ public class OrganizationMapper {
         foo.setOrgName(orgDto.getOrgName());
         foo.setOrgKey(orgDto.getOrgKey());
         foo.setPhone(orgDto.getPhone());
+        foo.setOrgStatus(orgDto.getOrgStatus());
         
         return foo;
 
@@ -37,6 +38,7 @@ public class OrganizationMapper {
         foo.setOrgName(organization.getOrgName());
         foo.setOrgKey(organization.getOrgKey());
         foo.setPhone(organization.getPhone());
+        foo.setOrgStatus(organization.getOrgStatus());
         
         return foo;
     }

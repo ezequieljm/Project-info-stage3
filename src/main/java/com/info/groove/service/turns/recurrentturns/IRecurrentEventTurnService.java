@@ -17,7 +17,7 @@ public interface IRecurrentEventTurnService {
             throws UserNotFoundException, EventNotFoundException, OrganizationNotFoundException;
 
     // Delete a turn
-    public void deleteRecurrentEventTurn(Long recTurnId) throws TurnNofFoundException;
+    public RecurrentEventTurnDTO deleteRecurrentEventTurn(Long recTurnId, String key) throws TurnNofFoundException;
 
     // Get all active turns by organization
     public List<RecurrentEventTurn> searchAllTurnsByOrganization(Long orgId, boolean active)

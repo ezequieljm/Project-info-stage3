@@ -53,7 +53,8 @@ public class EventService implements IEventService {
     }
 
     @Override
-    public void deleteEvent(Long eventId, String key) throws EventNotFoundException {
+    public EventDTO deleteEvent(Long eventId, String key)
+            throws EventNotFoundException, OrganizationKeyNotEqual {
         // First: We verify if the event exists and organization key is valid, then convert dto to entity
         Optional<Event> event = eventRepository.findById(eventId);
         if (event.isEmpty())
@@ -63,6 +64,11 @@ public class EventService implements IEventService {
             throw new OrganizationKeyNotEqual("It is not possible to add event. the keys are not the same");
 
         // Second: We delete Event
-        eventRepository.deleteById(eventId);
+//        eventRepository.deleteById(eventId);
+
+        Event originalEvent = event.get();
+        originalEvent.setEventStatus(false);
+        EventDTO eventDto = EventMapper.entityToDto(eventRepository.save(originalEvent));
+        return eventDto;
     }
 }

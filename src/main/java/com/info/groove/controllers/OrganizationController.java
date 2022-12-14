@@ -88,11 +88,21 @@ public class OrganizationController {
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/{id}/{key}")
-    public ResponseEntity<Map<String,Object>> deleteOrganization(@PathVariable Long id, @PathVariable String key) {
+//    @DeleteMapping(value = "/{id}/{key}")
+//    public ResponseEntity<Map<String,Object>> deleteOrganization(@PathVariable Long id, @PathVariable String key) {
+//        Map<String,Object> response = new HashMap<>();
+//        organizationService.deleteOrganization(id,key);
+//        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
+//    }
+
+    // Logical deletion
+    @PutMapping(value = "/delete/{id}/{key}")
+    public ResponseEntity<Map<String,Object>> deleteOrganization(
+            @PathVariable Long id,
+            @PathVariable String key
+    ) {
         Map<String,Object> response = new HashMap<>();
         organizationService.deleteOrganization(id,key);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
-
 }

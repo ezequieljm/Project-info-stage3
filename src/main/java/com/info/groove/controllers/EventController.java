@@ -50,11 +50,23 @@ public class EventController {
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/{id}/{key}")
-    public ResponseEntity<Map<String, Object>> deleteEventOfOrg(@PathVariable Long id, @PathVariable String key) {
+//    @DeleteMapping(value = "/{id}/{key}")
+//    public ResponseEntity<Map<String, Object>> deleteEventOfOrg(@PathVariable Long id, @PathVariable String key) {
+//        Map<String,Object> response = new HashMap<String, Object>();
+//        eventService.deleteEvent(id,key);
+//        response.put("Event deleted", null);
+//        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
+//    }
+
+    // Logical deletion
+    @PutMapping(value = "/delete/{id}/{key}")
+    public ResponseEntity<Map<String,Object>> deleteEventOfOrg(
+            @PathVariable Long id,
+            @PathVariable String key
+    ) {
         Map<String,Object> response = new HashMap<String, Object>();
-        eventService.deleteEvent(id,key);
-        response.put("Event deleted", null);
+        EventDTO deletedEvent = eventService.deleteEvent(id,key);
+        response.put("Events of Organization", deletedEvent);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 

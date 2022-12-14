@@ -17,6 +17,6 @@ public interface IOrganizationService {
 
     public OrganizationDTO updateOrg(OrganizationDTO org, String key);
     
-    public void deleteOrganization(Long id, String key);
+    public OrganizationDTO deleteOrganization(Long id, String key);
 
 }

@@ -24,12 +24,16 @@ public class OrganizationDTO {
     @NotEmpty
     private String orgKey;
 
+    @NotEmpty
+    private boolean orgStatus;
+
     private Address addressId;
 
     public OrganizationDTO() {
     }
 
     public OrganizationDTO(Long orgId, String email, String orgName, String phone, String cuit, String orgKey,
+            boolean orgStatus,
             Address addressId) {
         this.orgId = orgId;
         this.email = email;
@@ -37,6 +41,7 @@ public class OrganizationDTO {
         this.phone = phone;
         this.cuit = cuit;
         this.orgKey = orgKey;
+        this.orgStatus = orgStatus;
         this.addressId = addressId;
     }
 
@@ -86,6 +91,14 @@ public class OrganizationDTO {
 
     public void setOrgKey(String orgKey) {
         this.orgKey = orgKey;
+    }
+
+    public boolean getOrgStatus() {
+        return orgStatus;
+    }
+
+    public void setOrgStatus(boolean orgStatus) {
+        this.orgStatus = orgStatus;
     }
 
     public Address getAddressId() {

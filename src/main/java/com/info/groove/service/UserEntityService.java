@@ -70,20 +70,27 @@ public class UserEntityService implements IUserEntityService {
     }
 
     @Override
-    public void deleteUserEntity(Long id, String key) throws RuntimeException {
+    public UserEntityDTO deleteUserEntity(Long id, String key) throws UserNotFoundException {
         // First: We seek user by id
         Optional<UserEntity> maybeUser = userEntityRepository.findById(id);
 
         // Return a exception
-        if (maybeUser.isEmpty()) throw new UserNotFoundException("User not exists to delete.");
+        if (maybeUser.isEmpty())
+            throw new UserNotFoundException("User not exists to delete.");
 
         // Second: Verify that the key is the same, Handle the error that the user key isn't the same
         UserEntity originalUser = maybeUser.get();
 
         // Return a exception
-        if (!originalUser.getUserKey().equals(key)) throw new UserNotFoundException("The keys are not equals");
+        if (!originalUser.getUserKey().equals(key))
+            throw new UserNotFoundException("The keys are not equals");
 
         // Thrid: We delete user
-        userEntityRepository.deleteById(id);
+//        userEntityRepository.deleteById(id);
+
+        originalUser.setUserStatus(false);
+
+        UserEntityDTO userDto = UserEntityMapper.entityToDto(userEntityRepository.save(originalUser));
+        return userDto;
     }
 }
