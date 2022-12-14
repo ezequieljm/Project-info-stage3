@@ -13,11 +13,11 @@ public interface IRecurrentEventTurnService {
             throws DuplicateDataError, UserNotFoundException, EventNotFoundException, OrganizationNotFoundException;
 
     // Update a turn
-    public RecurrentEventTurnDTO updateRecurrentEventTurn(RecurrentEventTurnDTO recurrentEventTurnDTO)
+    public RecurrentEventTurnDTO updateRecurrentEventTurn(RecurrentEventTurnDTO recurrentEventTurnDTO, String key)
             throws UserNotFoundException, EventNotFoundException, OrganizationNotFoundException;
 
     // Delete a turn
-    public void deleteRecurrentEventTurn(RecurrentEventTurnDTO recurrentEventTurnDTO) throws TurnNofFoundException;
+    public void deleteRecurrentEventTurn(Long recTurnId) throws TurnNofFoundException;
 
     // Get all active turns by organization
     public List<RecurrentEventTurn> searchAllTurnsByOrganization(Long orgId, boolean active)

@@ -89,7 +89,7 @@ public class RecurrentEventTurnService implements IRecurrentEventTurnService {
     }
 
     @Override
-    public RecurrentEventTurnDTO updateRecurrentEventTurn(RecurrentEventTurnDTO recurrentEventTurnDTO)
+    public RecurrentEventTurnDTO updateRecurrentEventTurn(RecurrentEventTurnDTO recurrentEventTurnDTO, String key)
             throws UserNotFoundException, EventNotFoundException, OrganizationNotFoundException,
             TurnNofFoundException, DuplicateDateTimeException {
         // Convert dto to entity
@@ -129,6 +129,9 @@ public class RecurrentEventTurnService implements IRecurrentEventTurnService {
 
         if (!turnOrgKey.equals(eventOrgKey)) throw new OrganizationKeyNotEqual("The key are not same");
 
+        String userKey = maybeUser.get().getUserKey();
+
+        if (!userKey.equals(key)) throw new OrganizationKeyNotEqual("The key are not same");
 
         // We control the date and time of turn
         Date dateTime = recurrentEventTurn.getTurnDateTime();
@@ -149,10 +152,10 @@ public class RecurrentEventTurnService implements IRecurrentEventTurnService {
     }
 
     @Override
-    public void deleteRecurrentEventTurn(RecurrentEventTurnDTO recurrentEventTurnDTO) throws TurnNofFoundException {
+    public void deleteRecurrentEventTurn(Long recTurnId) throws TurnNofFoundException {
         // We verify if turn exists
 
-        Long recTurnId = recurrentEventTurnDTO.getTurnId();
+        // Long recTurnId = recurrentEventTurnDTO.getTurnId();
         Optional<RecurrentEventTurn> maybeTurn = recurrentEventTurnRepository.findById(recTurnId);
         if (maybeTurn.isEmpty()) throw new TurnNofFoundException("Turn not exists");
 
