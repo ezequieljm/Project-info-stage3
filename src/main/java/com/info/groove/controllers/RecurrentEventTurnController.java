@@ -28,7 +28,9 @@ public class RecurrentEventTurnController {
     }
 
     @GetMapping(value = "/{orgId}")
-    public ResponseEntity<Map<String,Object>> getAllTurnsByOrg(@PathVariable Long orgId) {
+    public ResponseEntity<Map<String,Object>> getAllTurnsByOrg(
+            @PathVariable Long orgId
+    ) {
         Map<String,Object> response = new HashMap<String,Object>();
         List<RecurrentEventTurn> turns = recurrentEventTurnService.searchAllTurnsByOrganization(orgId, true);
         response.put("Turns list", turns);
@@ -36,7 +38,10 @@ public class RecurrentEventTurnController {
     }
 
     @GetMapping(value = "/{orgId}/{eventId}")
-    public ResponseEntity<Map<String,Object>> getAllTurnsByOrg(@PathVariable Long orgId, @PathVariable Long eventId) {
+    public ResponseEntity<Map<String,Object>> getAllTurnsByOrg(
+            @PathVariable Long orgId,
+            @PathVariable Long eventId
+    ) {
         Map<String,Object> response = new HashMap<String,Object>();
         List<RecurrentEventTurn> turns = recurrentEventTurnService.searchAllTurnByOrgAndEvent(orgId, eventId);
         response.put("Turns list", turns);
@@ -44,7 +49,9 @@ public class RecurrentEventTurnController {
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<Map<String,Object>> registerTurn(@RequestBody @Valid RecurrentEventTurnDTO turnDto) {
+    public ResponseEntity<Map<String,Object>> registerTurn(
+            @RequestBody @Valid RecurrentEventTurnDTO turnDto
+    ) {
         Map<String,Object> response = new HashMap<String,Object>();
         RecurrentEventTurnDTO turn = recurrentEventTurnService.save(turnDto);
         response.put("Stored Turn", turn);
@@ -52,7 +59,10 @@ public class RecurrentEventTurnController {
     }
 
     @PutMapping(value = "/update/{key}")
-    public ResponseEntity<Map<String,Object>> updateTurn(@RequestBody @Valid RecurrentEventTurnDTO turnDto, @PathVariable String key) {
+    public ResponseEntity<Map<String,Object>> updateTurn(
+            @RequestBody @Valid RecurrentEventTurnDTO turnDto,
+            @PathVariable String key
+    ) {
         Map<String,Object> response = new HashMap<String,Object>();
         RecurrentEventTurnDTO turn = recurrentEventTurnService.updateRecurrentEventTurn(turnDto,key);
         response.put("Updated Turn", turn);
