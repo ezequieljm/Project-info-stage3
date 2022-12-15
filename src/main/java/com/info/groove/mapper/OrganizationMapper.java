@@ -14,7 +14,7 @@ public class OrganizationMapper {
         foo.setOrgId(orgDto.getOrgId());
         foo.setCuit(orgDto.getCuit());
         foo.setEmail(orgDto.getEmail());
-        foo.setAddressId(orgDto.getAddressId());
+        foo.setAddress(orgDto.getAddress());
         foo.setOrgName(orgDto.getOrgName());
         foo.setOrgKey(orgDto.getOrgKey());
         foo.setPhone(orgDto.getPhone());
@@ -34,7 +34,7 @@ public class OrganizationMapper {
         foo.setOrgId(organization.getOrgId());
         foo.setCuit(organization.getCuit());
         foo.setEmail(organization.getEmail());
-        foo.setAddressId(organization.getAddressId());
+        foo.setAddress(organization.getAddress());
         foo.setOrgName(organization.getOrgName());
         foo.setOrgKey(organization.getOrgKey());
         foo.setPhone(organization.getPhone());

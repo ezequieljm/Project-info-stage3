@@ -41,10 +41,10 @@ public class UniqueEventTurnService implements IUniqueEventTurnService {
         UniqueEventTurn turn = UniqueEventTurnMapper.dtoToEntity(uniqueEventTurnDTO);
 
         // We verify if user, organization and event exists
-        Long userId = turn.getUserId().getUserId();
-        Long orgId = turn.getEventId().getOrganization().getOrgId();
-        String key = turn.getEventId().getOrganization().getOrgKey();
-        Long eventId = turn.getEventId().getEventId();
+        Long userId = turn.getUser().getUserId();
+        Long orgId = turn.getEvent().getOrganization().getOrgId();
+        String key = turn.getEvent().getOrganization().getOrgKey();
+        Long eventId = turn.getEvent().getEventId();
 
         userEntityRepository
                 .findById(userId)
@@ -78,10 +78,10 @@ public class UniqueEventTurnService implements IUniqueEventTurnService {
 
         // We verify if user, organization and event exists
         Long turnId = turn.getTurnId();
-        Long userId = turn.getUserId().getUserId();
-        Long orgId = turn.getEventId().getOrganization().getOrgId();
-        String key = turn.getEventId().getOrganization().getOrgKey();
-        Long eventId = turn.getEventId().getEventId();
+        Long userId = turn.getUser().getUserId();
+        Long orgId = turn.getEvent().getOrganization().getOrgId();
+        String key = turn.getEvent().getOrganization().getOrgKey();
+        Long eventId = turn.getEvent().getEventId();
 
         uniqueEventTurnRepository
                 .findById(turnId)
@@ -125,12 +125,12 @@ public class UniqueEventTurnService implements IUniqueEventTurnService {
 //                .orElseThrow(() -> new TurnNofFoundException("Turn cannot be delete because it does not exists"));
 
         UniqueEventTurn originalTurn = maybeTurn.get();
-        String key = originalTurn.getEventId().getOrganization().getOrgKey();
+        String key = originalTurn.getEvent().getOrganization().getOrgKey();
         if (!key.equals(orgKey)) throw new OrganizationKeyNotEqual("The keys are not same");
 
 
         // If the turn exists we delete it
-        originalTurn.setTurnStatus(false);
+        originalTurn.setTurnStatus(0);
         UniqueEventTurn aTurn = uniqueEventTurnRepository.save(originalTurn);
         return UniqueEventTurnMapper.entityToDto(aTurn);
 
@@ -146,12 +146,15 @@ public class UniqueEventTurnService implements IUniqueEventTurnService {
         List<UniqueEventTurn> turns = uniqueEventTurnRepository.findAll();
 
         // Filter by active status and organization key
-        List<UniqueEventTurn> activeTurns = turns.stream().filter(t -> t.getTurnStatus()).collect(Collectors.toList());
+        List<UniqueEventTurn> activeTurns = turns
+                .stream()
+                .filter(t -> t.getTurnStatus() == 1)
+                .collect(Collectors.toList());
 
         return activeTurns
                 .stream()
                 .filter(
-                        t -> t.getEventId()
+                        t -> t.getEvent()
                             .getOrganization()
                             .getOrgKey()
                             .equals(orgKey)
@@ -175,13 +178,16 @@ public class UniqueEventTurnService implements IUniqueEventTurnService {
         List<UniqueEventTurn> turns = uniqueEventTurnRepository.findAll();
 
         // Filter by active status and organization key
-        List<UniqueEventTurn> activeTurns = turns.stream().filter(t -> t.getTurnStatus()).collect(Collectors.toList());
+        List<UniqueEventTurn> activeTurns = turns
+                .stream()
+                .filter(t -> t.getTurnStatus() == 1)
+                .collect(Collectors.toList());
 
         List<UniqueEventTurn> turnsWithOrgAndEvent = new ArrayList<UniqueEventTurn>();
 
         for (UniqueEventTurn turn: activeTurns) {
-            Long turnEventId = turn.getEventId().getEventId();
-            String turnOrgKey = turn.getEventId().getOrganization().getOrgKey();
+            Long turnEventId = turn.getEvent().getEventId();
+            String turnOrgKey = turn.getEvent().getOrganization().getOrgKey();
             if (turnEventId.equals(eventId) && turnOrgKey.equals(orgKey)) turnsWithOrgAndEvent.add(turn);
         }
 

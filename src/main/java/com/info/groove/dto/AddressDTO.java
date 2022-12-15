@@ -1,25 +1,26 @@
 package com.info.groove.dto;
 
-import javax.validation.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
 
 public class AddressDTO {
-    
-    // @NotEmpty
+
+    @NotNull(message = "Id cannot be null")
     private Long addressId;
 
-    @NotEmpty
+    @NotNull(message = "Country cannot be null")
     private String country;
 
-    @NotEmpty
+    @NotNull(message = "State cannot be null")
     private String state;
 
-    @NotEmpty
+    @NotNull(message = "City cannot be null")
     private String city;
 
-    @NotEmpty
+    @NotNull(message = "Street cannot be null")
     private String street;
 
-    @NotEmpty
+    @NotNull(message = "Street number cannot be null")
     private int streetNumber;
 
     public AddressDTO() {

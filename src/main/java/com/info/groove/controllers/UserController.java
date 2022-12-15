@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = UserController.BASIS)
@@ -82,14 +81,14 @@ public class UserController {
         List<UserEntity> activeUsers = userEntityService
                 .findAllUsers()
                 .stream()
-                .filter(u -> u.getUserStatus() == true)
+                .filter(u -> u.getUserStatus() == 1)
                 .collect(Collectors.toList());
         response.put("All active users", activeUsers);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<Map<String,Object>> registerUser(@RequestBody @Valid UserEntityDTO userDto) {
+    public ResponseEntity<Map<String,Object>> registerUser(@RequestBody UserEntityDTO userDto) {
         Map<String,Object> response = new HashMap<>();
         UserEntityDTO user = userEntityService.save(UserEntityMapper.dtoToEntity(userDto));
 
@@ -100,7 +99,7 @@ public class UserController {
 
     @PutMapping(value = "/update/{key}")
     public ResponseEntity<Map<String,Object>> updateUser(
-            @RequestBody @Valid UserEntityDTO userDto,
+            @RequestBody UserEntityDTO userDto,
             @PathVariable String key
     ) {
         Map<String,Object> response = new HashMap<>();

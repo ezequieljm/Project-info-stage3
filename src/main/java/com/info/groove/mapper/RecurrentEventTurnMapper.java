@@ -11,8 +11,8 @@ public class RecurrentEventTurnMapper {
         RecurrentEventTurn recurrentEventTurn = new RecurrentEventTurn();
 
         recurrentEventTurn.setTurnId(recurrentEventTurnDto.getTurnId());
-        recurrentEventTurn.setEventId(recurrentEventTurnDto.getEventId());
-        recurrentEventTurn.setUserId(recurrentEventTurnDto.getUserId());
+        recurrentEventTurn.setEventId(recurrentEventTurnDto.getEvent());
+        recurrentEventTurn.setUserId(recurrentEventTurnDto.getUser());
         recurrentEventTurn.setTurnDateTime(recurrentEventTurnDto.getTurnDateTime());
         recurrentEventTurn.setTurnStatus(recurrentEventTurnDto.getTurnStatus());
 
@@ -25,8 +25,8 @@ public class RecurrentEventTurnMapper {
         RecurrentEventTurnDTO foo = new RecurrentEventTurnDTO();
 
         foo.setTurnId(recurrentEventTurn.getTurnId());
-        foo.setEventId(recurrentEventTurn.getEventId());
-        foo.setUserId(recurrentEventTurn.getUserId());
+        foo.setEvent(recurrentEventTurn.getEventId());
+        foo.setUser(recurrentEventTurn.getUserId());
         foo.setTurnDateTime(recurrentEventTurn.getTurnDateTime());
         foo.setTurnStatus(recurrentEventTurn.getTurnStatus());
 

@@ -1,6 +1,5 @@
 package com.info.groove.controllers;
 
-import javax.validation.Valid;
 
 import com.info.groove.dto.RecurrentEventTurnDTO;
 import com.info.groove.entity.RecurrentEventTurn;
@@ -50,7 +49,7 @@ public class RecurrentEventTurnController {
 
     @PostMapping(value = "/")
     public ResponseEntity<Map<String,Object>> registerTurn(
-            @RequestBody @Valid RecurrentEventTurnDTO turnDto
+            @RequestBody RecurrentEventTurnDTO turnDto
     ) {
         Map<String,Object> response = new HashMap<String,Object>();
         RecurrentEventTurnDTO turn = recurrentEventTurnService.save(turnDto);
@@ -60,7 +59,7 @@ public class RecurrentEventTurnController {
 
     @PutMapping(value = "/update/{key}")
     public ResponseEntity<Map<String,Object>> updateTurn(
-            @RequestBody @Valid RecurrentEventTurnDTO turnDto,
+            @RequestBody RecurrentEventTurnDTO turnDto,
             @PathVariable String key
     ) {
         Map<String,Object> response = new HashMap<String,Object>();

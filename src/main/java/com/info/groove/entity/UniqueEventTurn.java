@@ -1,6 +1,8 @@
 package com.info.groove.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 @Entity(name = "unique_event_turns")
@@ -8,34 +10,40 @@ public class UniqueEventTurn {
 
     //Attributes
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "turn_id")
     private Long turnId;
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "event_id")
-    private Event eventId;
+    @NotNull(message = "Cannot be null")
+    private Event event;
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private UserEntity userId;
+    @NotNull(message = "Cannot be null")
+    private UserEntity user;
 
     @Column(name = "turn_date")
+    @NotNull(message = "Cannot be null")
     private Date turnDate;
 
     @Column(name = "turn_status")
-    private boolean turnStatus;
+    @NotNull(message = "Cannot be null")
+    @Pattern(regexp = "^[0,1]$")
+    private int turnStatus;
 
     @Column(name = "key_value")
+    @NotNull(message = "Cannot be null")
     private String keyValue;
 
     //Contructors
     public UniqueEventTurn() { }
 
-    public UniqueEventTurn(Long turnId, Event eventId, UserEntity userId, Date turnDate, boolean turnStatus, String keyValue) {
+    public UniqueEventTurn(Long turnId, Event event, UserEntity user, Date turnDate, int turnStatus, String keyValue) {
         this.turnId = turnId;
-        this.eventId = eventId;
-        this.userId = userId;
+        this.event = event;
+        this.user = user;
         this.turnDate = turnDate;
         this.turnStatus = turnStatus;
         this.keyValue = keyValue;
@@ -50,20 +58,20 @@ public class UniqueEventTurn {
         this.turnId = turnId;
     }
 
-    public Event getEventId() {
-        return eventId;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setEventId(Event eventId) {
-        this.eventId = eventId;
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
-    public UserEntity getUserId() {
-        return userId;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserId(UserEntity userId) {
-        this.userId = userId;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public Date getTurnDate() {
@@ -74,11 +82,11 @@ public class UniqueEventTurn {
         this.turnDate = turnDate;
     }
 
-    public boolean getTurnStatus() {
+    public int getTurnStatus() {
         return turnStatus;
     }
 
-    public void setTurnStatus(boolean turnStatus) {
+    public void setTurnStatus(int turnStatus) {
         this.turnStatus = turnStatus;
     }
 

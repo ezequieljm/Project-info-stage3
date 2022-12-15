@@ -1,6 +1,5 @@
 package com.info.groove.controllers;
 
-import javax.validation.Valid;
 import com.info.groove.dto.UniqueEventTurnDTO;
 import com.info.groove.entity.UniqueEventTurn;
 import com.info.groove.service.turns.uniqueturns.IUniqueEventTurnService;
@@ -52,7 +51,7 @@ public class UniqueEventTurnController {
 
     @PostMapping(value = "/{orgKey}")
     public ResponseEntity<Map<String,Object>> registerTurn(
-            @RequestBody @Valid UniqueEventTurnDTO turnDto,
+            @RequestBody UniqueEventTurnDTO turnDto,
             @PathVariable String orgKey
     ) {
         Map<String,Object> response = new HashMap<String,Object>();
@@ -63,7 +62,7 @@ public class UniqueEventTurnController {
 
     @PutMapping(value = "/update/{key}")
     public ResponseEntity<Map<String,Object>> updateTurn(
-            @RequestBody @Valid UniqueEventTurnDTO turnDto,
+            @RequestBody UniqueEventTurnDTO turnDto,
             @PathVariable String key
     ) {
         Map<String,Object> response = new HashMap<String,Object>();

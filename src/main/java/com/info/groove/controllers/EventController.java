@@ -2,7 +2,6 @@ package com.info.groove.controllers;
 
 import com.info.groove.dto.EventDTO;
 import com.info.groove.entity.Event;
-import com.info.groove.repository.IAddressRepository;
 import com.info.groove.service.events.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,10 +33,13 @@ public class EventController {
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/{key}")
-    public ResponseEntity<Map<String,Object>> registerEvent(@PathVariable String key, @RequestBody EventDTO newEvent) {
+    @PostMapping
+    public ResponseEntity<Map<String,Object>> registerEvent(
+            @RequestBody EventDTO newEvent,
+            @RequestBody String organizationKey
+    ) {
         Map<String,Object> response = new HashMap<String, Object>();
-        EventDTO storedEvent = eventService.save(newEvent, key);
+        EventDTO storedEvent = eventService.save(newEvent, organizationKey);
         response.put("Events of Organization", storedEvent);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
@@ -45,7 +47,7 @@ public class EventController {
     @PutMapping(value = "/update/{key}")
     public ResponseEntity<Map<String,Object>> updateEvent(@PathVariable String key, @RequestBody EventDTO event) {
         Map<String,Object> response = new HashMap<String, Object>();
-        EventDTO updatedEvent = eventService.updateEvent(event,key);
+        EventDTO updatedEvent = eventService.updateEvent(event);
         response.put("Events of Organization", updatedEvent);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
@@ -65,7 +67,7 @@ public class EventController {
             @PathVariable String key
     ) {
         Map<String,Object> response = new HashMap<String, Object>();
-        EventDTO deletedEvent = eventService.deleteEvent(id,key);
+        EventDTO deletedEvent = eventService.deleteEvent(id);
         response.put("Events of Organization", deletedEvent);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }

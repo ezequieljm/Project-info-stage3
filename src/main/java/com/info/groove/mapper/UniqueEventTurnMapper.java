@@ -11,8 +11,8 @@ public class UniqueEventTurnMapper {
         UniqueEventTurn uniqueEventTurn = new UniqueEventTurn();
 
         uniqueEventTurn.setTurnId(uniqueEventTurnDTO.getTurnId());
-        uniqueEventTurn.setEventId(uniqueEventTurnDTO.getEventId());
-        uniqueEventTurn.setUserId(uniqueEventTurnDTO.getUserId());
+        uniqueEventTurn.setEvent(uniqueEventTurnDTO.getEvent());
+        uniqueEventTurn.setUser(uniqueEventTurnDTO.getUser());
         uniqueEventTurn.setTurnDate(uniqueEventTurnDTO.getTurnDate());
         uniqueEventTurn.setTurnStatus(uniqueEventTurnDTO.getTurnStatus());
         uniqueEventTurn.setKeyValue(uniqueEventTurnDTO.getKeyValue());
@@ -26,8 +26,8 @@ public class UniqueEventTurnMapper {
         UniqueEventTurnDTO uniqueEventTurnDTO = new UniqueEventTurnDTO();
 
         uniqueEventTurnDTO.setTurnId(uniqueEventTurn.getTurnId());
-        uniqueEventTurnDTO.setEventId(uniqueEventTurn.getEventId());
-        uniqueEventTurnDTO.setUserId(uniqueEventTurn.getUserId());
+        uniqueEventTurnDTO.setEvent(uniqueEventTurn.getEvent());
+        uniqueEventTurnDTO.setUser(uniqueEventTurn.getUser());
         uniqueEventTurnDTO.setTurnDate(uniqueEventTurn.getTurnDate());
         uniqueEventTurnDTO.setTurnStatus(uniqueEventTurn.getTurnStatus());
         uniqueEventTurnDTO.setKeyValue(uniqueEventTurn.getKeyValue());

@@ -10,11 +10,11 @@ import java.util.List;
 
 public interface IEventService {
 
-    public EventDTO save(EventDTO eventDto, String key) throws OrganizationKeyNotEqual;
+    public EventDTO save(EventDTO eventDto, String organizationKey) throws OrganizationKeyNotEqual;
 
-    public EventDTO updateEvent(EventDTO eventDTO, String key) throws OrganizationKeyNotEqual;
+    public EventDTO updateEvent(EventDTO eventDTO) throws OrganizationKeyNotEqual;
 
     public List<Event> getAllEventsByOrganization(Long orgId) throws OrganizationNotFoundException;
 
-    public EventDTO deleteEvent(Long eventId, String key) throws EventNotFoundException, OrganizationKeyNotEqual;
+    public EventDTO deleteEvent(Long eventId) throws EventNotFoundException, OrganizationKeyNotEqual;
 }

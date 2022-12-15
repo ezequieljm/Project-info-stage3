@@ -3,32 +3,42 @@ package com.info.groove.dto;
 import com.info.groove.entity.Event;
 import com.info.groove.entity.UserEntity;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 public class UniqueEventTurnDTO {
 
 
     //Attributes
+    @NotNull(message = "Id cannot be null")
     private Long turnId;
 
-    private Event eventId;
+    @NotNull(message = "Event Cannot be null")
+    private Event event;
 
-    private UserEntity userId;
+    @NotNull(message = "User Cannot be null")
+    private UserEntity user;
 
+    @NotNull(message = "Date Cannot be null")
     private Date turnDate;
 
-    private boolean turnStatus;
+    @NotNull(message = "Status Cannot be null")
+    @Pattern(regexp = "^[0,1]$")
+    private int turnStatus;
 
+    @NotNull(message = "Key Cannot be null")
     private String keyValue;
 
     //Contructors
     public UniqueEventTurnDTO() {
     }
 
-    public UniqueEventTurnDTO(Long turnId, Event eventId, UserEntity userId, Date turnDate, boolean turnStatus, String keyValue) {
+    public UniqueEventTurnDTO(Long turnId, Event event, UserEntity user, Date turnDate, int turnStatus, String keyValue) {
         this.turnId = turnId;
-        this.eventId = eventId;
-        this.userId = userId;
+        this.event = event;
+        this.user = user;
         this.turnDate = turnDate;
         this.turnStatus = turnStatus;
         this.keyValue = keyValue;
@@ -43,20 +53,20 @@ public class UniqueEventTurnDTO {
         this.turnId = turnId;
     }
 
-    public Event getEventId() {
-        return eventId;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setEventId(Event eventId) {
-        this.eventId = eventId;
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
-    public UserEntity getUserId() {
-        return userId;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserId(UserEntity userId) {
-        this.userId = userId;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public Date getTurnDate() {
@@ -67,11 +77,11 @@ public class UniqueEventTurnDTO {
         this.turnDate = turnDate;
     }
 
-    public boolean getTurnStatus() {
+    public int getTurnStatus() {
         return turnStatus;
     }
 
-    public void setTurnStatus(boolean turnStatus) {
+    public void setTurnStatus(int turnStatus) {
         this.turnStatus = turnStatus;
     }
 

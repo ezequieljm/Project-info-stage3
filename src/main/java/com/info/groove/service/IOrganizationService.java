@@ -9,14 +9,18 @@ public interface IOrganizationService {
 
     public List<Organization> getAllOrganizations();
 
-    public Organization findByOrganizationName(String orgName);
+    public Organization searchByOrganizationName(String orgName);
 
-    public Organization findByOrganizationCuit(String orgCuit);
+    public Organization searchByOrganizationCuit(String orgCuit);
+
+    public Organization searchByOrganizationId(Long id);
 
     public OrganizationDTO save(OrganizationDTO org);
 
-    public OrganizationDTO updateOrg(OrganizationDTO org, String key);
+    public OrganizationDTO updateOrg(OrganizationDTO org);
     
-    public OrganizationDTO deleteOrganization(Long id, String key);
+    public OrganizationDTO logicalDeletionOrganization(OrganizationDTO organizationDTO);
+
+    public OrganizationDTO deleteOrganization(OrganizationDTO organizationDTO);
 
 }

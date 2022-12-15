@@ -1,0 +1,55 @@
+{
+  "Organizations": [
+    {
+      "orgId": 1,
+      "email": "nirvane@gmail.com",
+      "orgName": "Nirvana",
+      "phone": "34651987654",
+      "cuit": "30-98765412-4",
+      "orgKey": "kurtcobain",
+      "orgStatus": true,
+      "address": {
+        "addressId": 1,
+        "country": "Unite States",
+        "state": "Washington",
+        "city": "Aberdeen",
+        "street": "123 Grunge",
+        "streetNumber": 123
+      }
+    },
+    {
+      "orgId": 6,
+      "email": "needForSpeed@gmail.com",
+      "orgName": "Electronic Games S.A",
+      "phone": "98763471256",
+      "cuit": "30-78523409-4",
+      "orgKey": "needforspeed",
+      "orgStatus": true,
+      "address": {
+        "addressId": 7,
+        "country": "Unite States",
+        "state": "Nuevo Mexico",
+        "city": "Texas",
+        "street": "High way",
+        "streetNumber": 66
+      }
+    },
+    {
+      "orgId": 5,
+      "email": "eminem@gmail.com",
+      "orgName": "Eminem",
+      "phone": "39898723489",
+      "cuit": "30-78563409-4",
+      "orgKey": "eminemrap",
+      "orgStatus": true,
+      "address": {
+        "addressId": 6,
+        "country": "Unite States",
+        "state": "Michigan",
+        "city": "Detroit",
+        "street": "8 mile",
+        "streetNumber": 313
+      }
+    }
+  ]
+}

@@ -2,43 +2,47 @@ package com.info.groove.entity;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-@Entity(name = "events")
+@Entity
+@Table(name = "events")
 public class Event {
 
     /*
      * Attributes
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "event_id")
     private Long eventId;
 
-    @ManyToOne
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "org_id")
+    @NotNull(message = "Cannot be null")
     private Organization organization;
 
-    @ManyToOne
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id")
+    @NotNull(message = "Cannot be null")
     private Address address;
 
     @Column(name = "event_name")
+    @NotNull(message = "Name cannot be null")
     private String eventName;
 
     @Column(name = "event_status")
-    private boolean eventStatus;
+    @NotNull(message = "Status cannot be null")
+    @Pattern(regexp = "^[0,1]$")
+    private int eventStatus;
 
     @Column(name = "creation_date")
+    @NotNull(message = "Date cannot be null")
     private Date creationDate;
 
     @Column(name = "event_type")
+    @NotNull(message = "Type cannot be null")
     private String eventType;
 
     /*
@@ -47,7 +51,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(Organization organization, Address address, String eventName, boolean eventStatus, Date creationDate, String eventType) {
+    public Event(Organization organization, Address address, String eventName, int eventStatus, Date creationDate, String eventType) {
         this.organization = organization;
         this.address = address;
         this.eventName = eventName;
@@ -91,11 +95,11 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public boolean getEventStatus() {
+    public int getEventStatus() {
         return eventStatus;
     }
 
-    public void setEventStatus(boolean eventStatus) {
+    public void setEventStatus(int eventStatus) {
         this.eventStatus = eventStatus;
     }
 

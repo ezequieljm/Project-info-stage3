@@ -1,11 +1,8 @@
 package com.info.groove.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity(name = "address")
 public class Address {
@@ -14,27 +11,29 @@ public class Address {
      * Attributes
      */
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id")
     private Long addressId;
 
     @Column(name = "country")
+    @NotNull(message = "Country cannot be null")
     private String country;
 
-    @Column(name = "state_ad")
+    @Column(name = "state")
+    @NotNull(message = "State cannot be null")
     private String state;
 
     @Column(name = "city")
+    @NotNull(message = "City cannot be null")
     private String city;
 
     @Column(name = "street")
+    @NotNull(message = "Street cannot be null")
     private String street;
 
     @Column(name = "street_number")
+    @NotNull(message = "Street number cannot be null")
     private int streetNumber;
-
-    @OneToOne(mappedBy = "addressId")
-    private Organization organization;
 
     /*
      * Constructors
@@ -100,15 +99,6 @@ public class Address {
 
     public void setStreetNumber(int streetNumber) {
         this.streetNumber = streetNumber;
-    }
-
-    @JsonBackReference
-    public Organization getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
     }
 
 }

@@ -17,7 +17,7 @@ public class UserEntityMapper {
         foo.setFirstname(userEntityDto.getFirstname());
         foo.setLastname(userEntityDto.getLastname());
         foo.setUserKey(userEntityDto.getUserKey());
-        foo.setUserStatus(userEntityDto.isUserStatus());
+        foo.setUserStatus(userEntityDto.getUserStatus());
 
         return foo;
     }

@@ -3,35 +3,38 @@ package com.info.groove.dto;
 import com.info.groove.entity.Address;
 import com.info.groove.entity.Organization;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
-import javax.validation.constraints.NotEmpty;
 
 public class EventDTO {
 
+    @NotNull(message = "Id cannot be null")
     private Long eventId;
 
-    @NotEmpty
+    @NotNull(message = "Cannot be null")
     private Organization organization;
 
-    @NotEmpty
+    @NotNull(message = "Cannot be null")
     private Address address;
 
-    @NotEmpty
+    @NotNull(message = "Name cannot be null")
     private String eventName;
 
-    @NotEmpty
-    private boolean eventStatus;
+    @NotNull(message = "Status cannot be null")
+    @Pattern(regexp = "^[0,1]$")
+    private int eventStatus;
 
-    @NotEmpty
+    @NotNull(message = "Date cannot be null")
     private Date creationDate;
 
-    @NotEmpty
+    @NotNull(message = "Type cannot be null")
     private String eventType;
 
     public EventDTO() { }
 
 
-    public EventDTO(Long eventId, Organization organization, Address address, String eventName, boolean eventStatus, Date creationDate, String eventType) {
+    public EventDTO(Long eventId, Organization organization, Address address, String eventName, int eventStatus, Date creationDate, String eventType) {
         this.eventId = eventId;
         this.organization = organization;
         this.address = address;
@@ -73,11 +76,11 @@ public class EventDTO {
         this.eventName = eventName;
     }
 
-    public boolean getEventStatus() {
+    public int getEventStatus() {
         return eventStatus;
     }
 
-    public void setEventStatus(boolean eventStatus) {
+    public void setEventStatus(int eventStatus) {
         this.eventStatus = eventStatus;
     }
 

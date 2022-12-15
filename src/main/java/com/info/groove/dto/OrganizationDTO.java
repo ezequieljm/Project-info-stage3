@@ -1,43 +1,46 @@
 package com.info.groove.dto;
 
-//import javax.validation.constraints.NotEmpty;
-//import org.hibernate.validator.contraints.NotEmpty;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
 import com.info.groove.entity.Address;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class OrganizationDTO {
-    
-    // @NotEmpty
+
+    @NotNull(message = "Id cannot be null")
     private Long orgId;
 
-    @NotEmpty
+    @NotNull(message = "Email cannot be null")
     private String email;
 
-    @NotEmpty
+    @NotNull(message = "Name cannot be null")
     private String orgName;
 
-    @NotEmpty
+    @NotNull(message = "Phone cannot be null")
     private String phone;
 
-    @NotEmpty
+    @NotNull(message = "Cuit cannot be null")
+    @Size(min = 13, max = 13)
+    @Pattern(regexp = "(30|15|20|21)-[0-9]{8}-(4|3|2)", message = "The cuit is not correct")
     private String cuit;
 
-    @NotEmpty
+    @NotNull(message = "Key cannot be null")
+    @Size(min = 6, max = 12)
     private String orgKey;
 
-    @NotEmpty
+    @NotNull(message = "Status cannot be null")
     private boolean orgStatus;
 
-    private Address addressId;
+    @NotNull(message = "Address cannot be null")
+    private Address address;
 
     public OrganizationDTO() {
     }
 
     public OrganizationDTO(Long orgId, String email, String orgName, String phone, String cuit, String orgKey,
             boolean orgStatus,
-            Address addressId) {
+            Address address) {
         this.orgId = orgId;
         this.email = email;
         this.orgName = orgName;
@@ -45,7 +48,7 @@ public class OrganizationDTO {
         this.cuit = cuit;
         this.orgKey = orgKey;
         this.orgStatus = orgStatus;
-        this.addressId = addressId;
+        this.address = address;
     }
 
     public Long getOrgId() {
@@ -104,12 +107,12 @@ public class OrganizationDTO {
         this.orgStatus = orgStatus;
     }
 
-    public Address getAddressId() {
-        return addressId;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAddressId(Address addressId) {
-        this.addressId = addressId;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
 }

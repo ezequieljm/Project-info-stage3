@@ -19,9 +19,9 @@ public class EventService implements IEventService {
     private IEventRepository eventRepository;
 
     @Override
-    public EventDTO save(EventDTO eventDto, String key) throws OrganizationKeyNotEqual {
+    public EventDTO save(EventDTO eventDto, String organizationKey) throws OrganizationKeyNotEqual {
         // First: We verify if the organization key is valid and then convert dto to entity
-        if (!eventDto.getOrganization().getOrgKey().equals(key))
+        if (!eventDto.getOrganization().getOrgKey().equals(organizationKey))
             throw new OrganizationKeyNotEqual("It is not possible to add event. the keys are not the same");
 
         // Second: We stored the event
@@ -31,14 +31,14 @@ public class EventService implements IEventService {
     }
 
     @Override
-    public EventDTO updateEvent(EventDTO eventDto, String key) throws OrganizationKeyNotEqual {
+    public EventDTO updateEvent(EventDTO eventDto) throws OrganizationKeyNotEqual {
         // First: We verify if the event exists and organization key is valid, then convert dto to entity
         Optional<Event> event = eventRepository.findById(eventDto.getEventId());
         if (event.isEmpty())
             throw new EventNotFoundException("The event not exists");
 
-        if (!eventDto.getOrganization().getOrgKey().equals(key))
-            throw new OrganizationKeyNotEqual("It is not possible to add event. the keys are not the same");
+//        if (!eventDto.getOrganization().getOrgKey().equals(key))
+//            throw new OrganizationKeyNotEqual("It is not possible to add event. the keys are not the same");
 
         // Second: We stored the event
         Event storedEvent = eventRepository.save(EventMapper.dtoToEntity(eventDto));
@@ -53,21 +53,21 @@ public class EventService implements IEventService {
     }
 
     @Override
-    public EventDTO deleteEvent(Long eventId, String key)
+    public EventDTO deleteEvent(Long eventId)
             throws EventNotFoundException, OrganizationKeyNotEqual {
         // First: We verify if the event exists and organization key is valid, then convert dto to entity
         Optional<Event> event = eventRepository.findById(eventId);
         if (event.isEmpty())
             throw new EventNotFoundException("The event not exists");
 
-        if (!event.get().getOrganization().getOrgKey().equals(key))
-            throw new OrganizationKeyNotEqual("It is not possible to add event. the keys are not the same");
+//        if (!event.get().getOrganization().getOrgKey().equals(key))
+//            throw new OrganizationKeyNotEqual("It is not possible to add event. the keys are not the same");
 
         // Second: We delete Event
 //        eventRepository.deleteById(eventId);
 
         Event originalEvent = event.get();
-        originalEvent.setEventStatus(false);
+        originalEvent.setEventStatus(0);
         EventDTO eventDto = EventMapper.entityToDto(eventRepository.save(originalEvent));
         return eventDto;
     }

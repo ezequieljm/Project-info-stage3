@@ -2,11 +2,10 @@ package com.info.groove.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity(name = "organizations")
 public class Organization {
@@ -15,43 +14,54 @@ public class Organization {
      * Attributes
      */
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "org_id")
+    @NotNull(message = "Cannot be null")
     private Long orgId;
 
     @Column(name = "email")
+    @NotNull(message = "Cannot be null")
     private String email;
 
     @Column(name = "org_name")
+    @NotNull(message = "Cannot be null")
     private String orgName;
 
     @Column(name = "phone")
+    @NotNull(message = "Cannot be null")
     private String phone;
 
     @Column(name = "cuit")
+    @NotNull(message = "Cannot be null")
+    @Size(min = 13, max = 13)
+    @Pattern(regexp = "(30|15|20|21)-[0-9]{8}-(4|3|2)", message = "The cuit is not correct")
     private String cuit;
 
     @Column(name = "org_key")
+    @NotNull(message = "Cannot be null")
+    @Size(min = 6, max = 12)
     private String orgKey;
 
     @Column(name = "org_status")
+    @NotNull(message = "Cannot be null")
     private boolean orgStatus;
 
     @OneToOne
     @JoinColumn(name = "address_id")
-    private Address addressId;
+    @NotNull(message = "Cannot be null")
+    private Address address;
 
     /*
      * Constructors
      */
-    public Organization(String email, String orgName, String phone, String cuit, String orgKey, boolean orgStatus, Address addressId) {
+    public Organization(String email, String orgName, String phone, String cuit, String orgKey, boolean orgStatus, Address address) {
         this.email = email;
         this.orgName = orgName;
         this.phone = phone;
         this.cuit = cuit;
         this.orgKey = orgKey;
         this.orgStatus = orgStatus;
-        this.addressId = addressId;
+        this.address = address;
     }
 
     public Organization() {
@@ -61,10 +71,6 @@ public class Organization {
      * Getters and setters
      */
 
-    @JsonManagedReference
-    public Address getAddressId() {
-        return addressId;
-    }
 
     public Long getOrgId() {
         return orgId;
@@ -114,16 +120,15 @@ public class Organization {
         this.orgKey = orgKey;
     }
 
-    public boolean getOrgStatus() {
-        return orgStatus;
-    }
+    public boolean getOrgStatus() { return orgStatus; }
 
     public void setOrgStatus(boolean orgStatus) {
         this.orgStatus = orgStatus;
     }
 
-    public void setAddressId(Address idAddress) {
-        this.addressId = idAddress;
-    }
+    @JsonManagedReference
+    public Address getAddress() { return address; }
+
+    public void setAddress(Address address) { this.address = address; }
 
 }

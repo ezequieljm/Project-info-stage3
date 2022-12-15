@@ -24,17 +24,14 @@ public class ControllerAdvisorGlobalException extends ResponseEntityExceptionHan
         OrganizationNotFoundException ex, WebRequest request, HttpStatus status){
 
         Map<String,Object> body = new LinkedHashMap<String,Object>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", status.value());
         body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body,HttpStatus.NOT_FOUND);
+        return new ResponseEntity<Object>(body,HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(OrganizationKeyNotEqual.class)
     public ResponseEntity<Object> handleOrganizationKeyNotEqual(OrganizationKeyNotEqual ex, WebRequest request) {
         
         Map<String,Object> body = new LinkedHashMap<String,Object>();
-        body.put("timestamp", LocalDateTime.now());
         body.put("message", ex.getMessage());
         return new ResponseEntity<Object>(body,HttpStatus.NOT_FOUND);
     }
@@ -47,8 +44,6 @@ public class ControllerAdvisorGlobalException extends ResponseEntityExceptionHan
     ){
 
         Map<String,Object> body = new LinkedHashMap<String,Object>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", status.value());
         body.put("message", ex.getMessage());
         return new ResponseEntity<Object>(body,HttpStatus.NOT_FOUND);
     }
@@ -56,7 +51,6 @@ public class ControllerAdvisorGlobalException extends ResponseEntityExceptionHan
     @ExceptionHandler(EventNotFoundException.class)
     public ResponseEntity<Object> handleEventNotFound(EventNotFoundException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<String,Object>();
-        body.put("timestamp", LocalDateTime.now());
         body.put("message", ex.getMessage());
         return new ResponseEntity<Object>(body,HttpStatus.NOT_FOUND);
     }
@@ -66,7 +60,6 @@ public class ControllerAdvisorGlobalException extends ResponseEntityExceptionHan
     @ExceptionHandler(DuplicateDataError.class)
     public ResponseEntity<Object> handleDuplicateDataError(DuplicateDataError ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<String,Object>();
-        body.put("timestamp", LocalDateTime.now());
         body.put("message", ex.getMessage());
         return new ResponseEntity<Object>(body,HttpStatus.BAD_REQUEST);
     }
@@ -74,7 +67,6 @@ public class ControllerAdvisorGlobalException extends ResponseEntityExceptionHan
     @ExceptionHandler(TurnNofFoundException.class)
     public ResponseEntity<Object> handleTurnNotFoundException(TurnNofFoundException ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<String,Object>();
-        body.put("timestamp", LocalDateTime.now());
         body.put("message", ex.getMessage());
         return new ResponseEntity<Object>(body,HttpStatus.NOT_FOUND);
     }
@@ -83,7 +75,6 @@ public class ControllerAdvisorGlobalException extends ResponseEntityExceptionHan
     public ResponseEntity<Object> handleDuplicateDateTime(DuplicateDateTimeException ex, WebRequest request) {
 
         Map<String, Object> body = new LinkedHashMap<String,Object>();
-        body.put("timestamp", LocalDateTime.now());
         body.put("message", ex.getMessage());
         return new ResponseEntity<Object>(body,HttpStatus.BAD_REQUEST);
     }
@@ -93,17 +84,16 @@ public class ControllerAdvisorGlobalException extends ResponseEntityExceptionHan
             HttpHeaders headers, HttpStatus status, WebRequest request) {
         
         Map<String,Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
         body.put("status", status.value());
 
-        List<String> errors = ex.getBindingResult()
-            .getFieldErrors()
-            .stream()
-            .map(x -> x.getDefaultMessage())
-            .collect(Collectors.toList());
+//        List<String> errors = ex.getBindingResult()
+//            .getFieldErrors()
+//            .stream()
+//            .map(x -> x.getDefaultMessage())
+//            .collect(Collectors.toList());
 
-        body.put("erros", errors);
-        return new ResponseEntity<>(body,HttpStatus.BAD_REQUEST);
+//        body.put("erros", errors);
+        return new ResponseEntity<Object>(body,HttpStatus.BAD_REQUEST);
     }
 
 

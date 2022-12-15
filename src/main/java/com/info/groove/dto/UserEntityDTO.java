@@ -1,30 +1,38 @@
 package com.info.groove.dto;
 
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class UserEntityDTO {
 
+    @NotNull(message = "Id cannot be null")
     private Long userId;
 
-    @NotEmpty
+    @NotNull(message = "Key cannot be null")
+    @Size(min = 12, max = 12)
     private String userKey;
 
-    @NotEmpty
+    @NotNull(message = "Firstname cannot be null")
+    @Size(min = 10, max = 40)
     private String firstname;
 
-    @NotEmpty
+    @NotNull(message = "Lastname cannot be null")
+    @Size(min = 10, max = 40)
     private String lastname;
 
-    @NotEmpty
-    private boolean userStatus;
+    @NotNull(message = "Status cannot be null")
+    @Pattern(regexp = "^[0,1]$")
+    private int userStatus;
 
-    @NotEmpty
+    @NotNull(message = "Dni cannot be null")
+    @Size(min = 8, max = 8)
     private int dni;
 
     public UserEntityDTO() { }
 
-    public UserEntityDTO(Long userId, String userKey, String firstname, String lastname, boolean userStatus, int dni) {
+    public UserEntityDTO(Long userId, String userKey, String firstname, String lastname, int userStatus, int dni) {
         this.userId = userId;
         this.userKey = userKey;
         this.firstname = firstname;
@@ -65,11 +73,11 @@ public class UserEntityDTO {
         this.lastname = lastname;
     }
 
-    public boolean isUserStatus() {
+    public int getUserStatus() {
         return userStatus;
     }
 
-    public void setUserStatus(boolean userStatus) {
+    public void setUserStatus(int userStatus) {
         this.userStatus = userStatus;
     }
 

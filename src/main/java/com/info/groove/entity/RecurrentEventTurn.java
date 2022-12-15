@@ -2,49 +2,51 @@ package com.info.groove.entity;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity(name = "recurrent_event_turns")
 public class RecurrentEventTurn {
 
     // Attributes
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "turn_id")
     private Long turnId;
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "event_id")
-    private Event eventId;
+    @NotNull(message = "Event Cannot be null")
+    private Event event;
 
-    @ManyToOne
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private UserEntity userId;
+    @NotNull(message = "User Cannot be null")
+    private UserEntity user;
 
     @Column(name = "turn_date")
+    @NotNull(message = "Date Cannot be null")
     private Date turnDateTime;
 
     @Column(name = "turn_status")
-    private boolean turnStatus;
+    @NotNull(message = "Status Cannot be null")
+    @Pattern(regexp = "^[0,1]$")
+    private int turnStatus;
 
     // Constructors
 
-    public RecurrentEventTurn() {
-    }
+    public RecurrentEventTurn() { }
 
-    public RecurrentEventTurn(Long turnId, Event eventId, UserEntity userId, Date turnDateTime, boolean turnStatus) {
+    public RecurrentEventTurn(Long turnId, Event eventId, UserEntity userId, Date turnDateTime, int turnStatus) {
         this.turnId = turnId;
-        this.eventId = eventId;
-        this.userId = userId;
+        this.event = eventId;
+        this.user = userId;
         this.turnDateTime = turnDateTime;
         this.turnStatus = turnStatus;
     }
+
+    // Getters and setters
 
     public Long getTurnId() {
         return turnId;
@@ -55,19 +57,19 @@ public class RecurrentEventTurn {
     }
 
     public Event getEventId() {
-        return eventId;
+        return event;
     }
 
     public void setEventId(Event eventId) {
-        this.eventId = eventId;
+        this.event = eventId;
     }
 
     public UserEntity getUserId() {
-        return userId;
+        return user;
     }
 
     public void setUserId(UserEntity userId) {
-        this.userId = userId;
+        this.user = userId;
     }
 
     public Date getTurnDateTime() {
@@ -78,11 +80,11 @@ public class RecurrentEventTurn {
         this.turnDateTime = turnDateTime;
     }
 
-    public boolean getTurnStatus() {
+    public int getTurnStatus() {
         return turnStatus;
     }
 
-    public void setTurnStatus(boolean turnStatus) {
+    public void setTurnStatus(int turnStatus) {
         this.turnStatus = turnStatus;
     }
 }

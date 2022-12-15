@@ -88,7 +88,7 @@ public class UserEntityService implements IUserEntityService {
         // Thrid: We delete user
 //        userEntityRepository.deleteById(id);
 
-        originalUser.setUserStatus(false);
+        originalUser.setUserStatus(0);
 
         UserEntityDTO userDto = UserEntityMapper.entityToDto(userEntityRepository.save(originalUser));
         return userDto;

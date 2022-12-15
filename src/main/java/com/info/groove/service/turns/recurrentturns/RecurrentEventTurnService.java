@@ -161,7 +161,7 @@ public class RecurrentEventTurnService implements IRecurrentEventTurnService {
 
         // We delete the turn of logic form
         RecurrentEventTurn originalTurn = maybeTurn.get();
-        originalTurn.setTurnStatus(false);
+        originalTurn.setTurnStatus(0);
         RecurrentEventTurn newTurn = recurrentEventTurnRepository.save(originalTurn);
         return RecurrentEventTurnMapper.entityToDto(newTurn);
     }
@@ -178,7 +178,7 @@ public class RecurrentEventTurnService implements IRecurrentEventTurnService {
         List<RecurrentEventTurn> turns = recurrentEventTurnRepository.findAll();
         List<RecurrentEventTurn> activeTurns = turns
                 .stream()
-                .filter(t -> t.getTurnStatus() == true)
+                .filter(t -> t.getTurnStatus() == 1)
                 .collect(Collectors.toList());
 
         return activeTurns;
