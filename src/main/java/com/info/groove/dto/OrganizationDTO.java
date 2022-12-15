@@ -1,6 +1,9 @@
 package com.info.groove.dto;
 
-import javax.validation.constraints.NotEmpty;
+//import javax.validation.constraints.NotEmpty;
+//import org.hibernate.validator.contraints.NotEmpty;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.info.groove.entity.Address;
 
