@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +27,25 @@ public class UserController {
     @Autowired
     private IUserEntityService userEntityService;
 
-    @GetMapping(value = "/")
+    @GetMapping
     public String helloUser(){ return "Hello user"; }
+
+
+    @GetMapping(value = "/all")
+    public ResponseEntity<Map<String,Object>> getAllUsers() {
+        Map<String,Object> response = new HashMap<>();
+        List<UserEntity> users = userEntityService.searchAllUsers();
+        response.put("All users", users);
+        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/all-actives")
+    public ResponseEntity<Map<String,Object>> getAllActiveUsers() {
+        Map<String,Object> response = new HashMap<>();
+        List<UserEntity> activeUsers = userEntityService.searchAllActiveUsers();
+        response.put("All active users", activeUsers);
+        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
+    }
 
     @GetMapping(value = "/fullname/{firstname}/{lastname}")
     public ResponseEntity<Map<String,Object>> getUserWithFullname(
@@ -67,34 +85,15 @@ public class UserController {
         return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
     }
 
-    @GetMapping(value = "/all")
-    public ResponseEntity<Map<String,Object>> getAllUsers() {
-        Map<String,Object> response = new HashMap<>();
-        List<UserEntity> users = userEntityService.findAllUsers();
-        response.put("All users", users);
-        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
-    }
 
-    @GetMapping(value = "/all-actives")
-    public ResponseEntity<Map<String,Object>> getAllActiveUsers() {
+    @PostMapping(value = "/register/")
+    public ResponseEntity<Map<String,Object>> registerUser(
+            @RequestBody @Valid UserEntityDTO userDto
+    ) {
         Map<String,Object> response = new HashMap<>();
-        List<UserEntity> activeUsers = userEntityService
-                .findAllUsers()
-                .stream()
-                .filter(u -> u.getUserStatus() == 1)
-                .collect(Collectors.toList());
-        response.put("All active users", activeUsers);
-        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
-    }
-
-    @PostMapping(value = "/")
-    public ResponseEntity<Map<String,Object>> registerUser(@RequestBody UserEntityDTO userDto) {
-        Map<String,Object> response = new HashMap<>();
-        UserEntityDTO user = userEntityService.save(UserEntityMapper.dtoToEntity(userDto));
-
+        UserEntityDTO user = userEntityService.save(userDto);
         response.put("Stored user: ", user);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
-
     }
 
     @PutMapping(value = "/update/{key}")
@@ -109,13 +108,6 @@ public class UserController {
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
-//    @DeleteMapping(value = "/{id}/{key}")
-//    public ResponseEntity<Map<String,Object>> deleteUser(@PathVariable Long id, @PathVariable String key) {
-//        Map<String,Object> response = new HashMap<>();
-//        userEntityService.deleteUserEntity(id,key);
-//        response.put(String.format("User with id %s deleted", id), null);
-//        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
-//    }
 
 
     // Logical deletion
@@ -127,6 +119,14 @@ public class UserController {
         Map<String,Object> response = new HashMap<>();
         UserEntityDTO userDto = userEntityService.deleteUserEntity(id,key);
         response.put(String.format("User with id %s deleted", id), userDto);
+        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/{id}/{key}")
+    public ResponseEntity<Map<String,Object>> permanentDeletionUser(@PathVariable Long id, @PathVariable String key) {
+        Map<String,Object> response = new HashMap<>();
+        userEntityService.deleteUserEntity(id,key);
+        response.put(String.format("User with id %s deleted", id), null);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 

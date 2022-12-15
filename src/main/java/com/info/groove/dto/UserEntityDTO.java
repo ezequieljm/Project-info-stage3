@@ -10,29 +10,27 @@ public class UserEntityDTO {
     @NotNull(message = "Id cannot be null")
     private Long userId;
 
+//    @Size(min = 6, max = 20, message = "User key not valid")
     @NotNull(message = "Key cannot be null")
-    @Size(min = 12, max = 12)
     private String userKey;
 
+//    @Size(min = 10, max = 40, message = "Firstname not valid")
     @NotNull(message = "Firstname cannot be null")
-    @Size(min = 10, max = 40)
     private String firstname;
 
+//    @Size(min = 10, max = 40, message = "Lastname not valid")
     @NotNull(message = "Lastname cannot be null")
-    @Size(min = 10, max = 40)
     private String lastname;
 
     @NotNull(message = "Status cannot be null")
-    @Pattern(regexp = "^[0,1]$")
-    private int userStatus;
+    private boolean userStatus;
 
     @NotNull(message = "Dni cannot be null")
-    @Size(min = 8, max = 8)
     private int dni;
 
     public UserEntityDTO() { }
 
-    public UserEntityDTO(Long userId, String userKey, String firstname, String lastname, int userStatus, int dni) {
+    public UserEntityDTO(Long userId, String userKey, String firstname, String lastname, boolean userStatus, int dni) {
         this.userId = userId;
         this.userKey = userKey;
         this.firstname = firstname;
@@ -73,11 +71,11 @@ public class UserEntityDTO {
         this.lastname = lastname;
     }
 
-    public int getUserStatus() {
+    public boolean getUserStatus() {
         return userStatus;
     }
 
-    public void setUserStatus(int userStatus) {
+    public void setUserStatus(boolean userStatus) {
         this.userStatus = userStatus;
     }
 

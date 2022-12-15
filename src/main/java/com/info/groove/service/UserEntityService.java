@@ -5,11 +5,13 @@ import com.info.groove.entity.UserEntity;
 import com.info.groove.exceptions.UserNotFoundException;
 import com.info.groove.mapper.UserEntityMapper;
 import com.info.groove.repository.IUserEntityRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserEntityService implements IUserEntityService {
@@ -17,6 +19,16 @@ public class UserEntityService implements IUserEntityService {
     @Autowired
     private IUserEntityRepository userEntityRepository;
 
+
+    @Override
+    public List<UserEntity> searchAllUsers() {
+        return userEntityRepository.findAll();
+    }
+
+    public List<UserEntity> searchAllActiveUsers() {
+        List<UserEntity> users = userEntityRepository.findAll();
+        return users.stream().filter(u -> u.getUserStatus()).collect(Collectors.toList());
+    }
 
     @Override
     public UserEntity searchByFullname(String firstname, String lastname) throws UserNotFoundException {
@@ -39,14 +51,12 @@ public class UserEntityService implements IUserEntityService {
         return userEntityRepository.findByDni(dni);
     }
 
-    @Override
-    public List<UserEntity> findAllUsers() {
-        return userEntityRepository.findAll();
-    }
 
     @Override
-    public UserEntityDTO save(UserEntity userEntity) {
-        return UserEntityMapper.entityToDto(userEntityRepository.save(userEntity));
+    public UserEntityDTO save(UserEntityDTO userEntityDto) {
+        UserEntity user = UserEntityMapper.dtoToEntity(userEntityDto);
+        UserEntity newUser = userEntityRepository.save(user);
+        return UserEntityMapper.entityToDto(newUser);
     }
 
     @Override
@@ -88,7 +98,7 @@ public class UserEntityService implements IUserEntityService {
         // Thrid: We delete user
 //        userEntityRepository.deleteById(id);
 
-        originalUser.setUserStatus(0);
+        originalUser.setUserStatus(false);
 
         UserEntityDTO userDto = UserEntityMapper.entityToDto(userEntityRepository.save(originalUser));
         return userDto;

@@ -12,9 +12,11 @@ public interface IUserEntityService {
 
     public Optional<UserEntity> searchByDni(int dni);
 
-    public List<UserEntity> findAllUsers();
+    public List<UserEntity> searchAllUsers();
 
-    public UserEntityDTO save(UserEntity userEntity);
+    public List<UserEntity> searchAllActiveUsers();
+
+    public UserEntityDTO save(UserEntityDTO userEntityDto);
 
     public UserEntityDTO updateUserEntity(UserEntity user, String key);
 

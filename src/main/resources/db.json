@@ -51,5 +51,31 @@
         "streetNumber": 313
       }
     }
+  ],
+  "Users": [
+    {
+      "userId": 1,
+      "dni": 98765412,
+      "firstname": "Alisson",
+      "lastname": "Banner",
+      "userKey": "randomsomething",
+      "userStatus": true
+    },
+    {
+      "userId": 2,
+      "dni": 67598043,
+      "firstname": "Melody",
+      "lastname": "Marks",
+      "userKey": "melodyMarks",
+      "userStatus": true
+    },
+    {
+      "userId": 3,
+      "dni": 98765412,
+      "firstname": "Lena",
+      "lastname": "Paul",
+      "userKey": "otherRandom",
+      "userStatus": false
+    }
   ]
 }
