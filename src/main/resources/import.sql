@@ -1,5 +1,5 @@
-insert into address (address_id, city, country, state, street,street_number)
-values (1, "Aberdeen", "Unite States", "Washington", "123 Grunge", 123),
+insert into address (address_id,available, city, country, state, street,street_number)
+values (1,1,"Aberdeen", "Unite States", "Washington", "123 Grunge", 123),
 (2, "Jacksonville","Unite States", "Florida", "Haouse of Paine", 987),
 (3, "Bakersfield","Unite States", "California", "Jonathan Davis", 993),
 (4, "East Bay","Unite States", "California", "Sweet Children", 342),

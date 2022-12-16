@@ -63,19 +63,19 @@ public class OrganizationController {
     }
 
 
-    @PostMapping(value = "/register/")
+    @PostMapping(value = "/register")
     public ResponseEntity<Map<String,Object>> registerOrganization(
             @RequestBody @Valid OrganizationDTO organizationDtoPost
     ) {
 
         Map<String,Object> response = new HashMap<>();
-        OrganizationDTO newOrganization = organizationService.save(organizationDtoPost);
+        OrganizationDTO newOrganization = organizationService.register(organizationDtoPost);
         response.put("Organization", newOrganization);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
 
-    @PutMapping(value = "/update/")
+    @PutMapping(value = "/update")
     public ResponseEntity<Map<String,Object>> updateOrganization(
         @RequestBody @Valid OrganizationDTO organizationDTO
     ) {

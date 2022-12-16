@@ -15,7 +15,7 @@ public interface IOrganizationService {
 
     public Organization searchByOrganizationId(Long id);
 
-    public OrganizationDTO save(OrganizationDTO org);
+    public OrganizationDTO register(OrganizationDTO org);
 
     public OrganizationDTO updateOrg(OrganizationDTO org);
     

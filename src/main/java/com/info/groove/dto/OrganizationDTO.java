@@ -33,14 +33,14 @@ public class OrganizationDTO {
     private boolean orgStatus;
 
     @NotNull(message = "Address cannot be null")
-    private Address address;
+    private AddressDTO address;
 
     public OrganizationDTO() {
     }
 
     public OrganizationDTO(Long orgId, String email, String orgName, String phone, String cuit, String orgKey,
             boolean orgStatus,
-            Address address) {
+            AddressDTO address) {
         this.orgId = orgId;
         this.email = email;
         this.orgName = orgName;
@@ -107,11 +107,11 @@ public class OrganizationDTO {
         this.orgStatus = orgStatus;
     }
 
-    public Address getAddress() {
+    public AddressDTO getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(AddressDTO address) {
         this.address = address;
     }
 

@@ -11,7 +11,7 @@ public class Address {
      * Attributes
      */
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id")
     private Long addressId;
 
@@ -36,7 +36,7 @@ public class Address {
     private int streetNumber;
 
     @Column(name = "available")
-    @NotNull(message = "State is null")
+    @NotNull(message = "Status is null")
     private boolean addressAvailable;
 
     /*

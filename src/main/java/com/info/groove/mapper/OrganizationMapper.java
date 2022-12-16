@@ -1,6 +1,8 @@
 package com.info.groove.mapper;
 
+import com.info.groove.dto.AddressDTO;
 import com.info.groove.dto.OrganizationDTO;
+import com.info.groove.entity.Address;
 import com.info.groove.entity.Organization;
 
 public class OrganizationMapper {
@@ -14,7 +16,8 @@ public class OrganizationMapper {
         foo.setOrgId(orgDto.getOrgId());
         foo.setCuit(orgDto.getCuit());
         foo.setEmail(orgDto.getEmail());
-        foo.setAddress(orgDto.getAddress());
+        Address address = AddressMapper.dtoToEntity(orgDto.getAddress());
+        foo.setAddress(address);
         foo.setOrgName(orgDto.getOrgName());
         foo.setOrgKey(orgDto.getOrgKey());
         foo.setPhone(orgDto.getPhone());
@@ -34,7 +37,8 @@ public class OrganizationMapper {
         foo.setOrgId(organization.getOrgId());
         foo.setCuit(organization.getCuit());
         foo.setEmail(organization.getEmail());
-        foo.setAddress(organization.getAddress());
+        AddressDTO addressDto = AddressMapper.entityToDTO(organization.getAddress());
+        foo.setAddress(addressDto);
         foo.setOrgName(organization.getOrgName());
         foo.setOrgKey(organization.getOrgKey());
         foo.setPhone(organization.getPhone());
