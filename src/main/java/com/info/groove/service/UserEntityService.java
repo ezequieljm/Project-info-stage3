@@ -5,7 +5,6 @@ import com.info.groove.entity.UserEntity;
 import com.info.groove.exceptions.UserNotFoundException;
 import com.info.groove.mapper.UserEntityMapper;
 import com.info.groove.repository.IUserEntityRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,24 +30,21 @@ public class UserEntityService implements IUserEntityService {
     }
 
     @Override
-    public UserEntity searchByFullname(String firstname, String lastname) throws UserNotFoundException {
+    public UserEntityDTO searchByFullname(String firstname, String lastname) throws UserNotFoundException {
         List<UserEntity> usersWithFirstname = userEntityRepository.findAllByFirstname(firstname);
         for (UserEntity user : usersWithFirstname) {
-            if (user.getLastname().equals(lastname)){
-                return new UserEntity(user.getUserId(),
-                        user.getUserKey(),
-                        user.getFirstname(),
-                        user.getLastname(),
-                        user.getUserStatus(),
-                        user.getDni());
-            }
+            if (user.getLastname().equals(lastname)) return UserEntityMapper.entityToDto(user);
         }
         throw new UserNotFoundException(String.format("User with fullname %s %s not found", firstname, lastname));
     }
 
     @Override
-    public Optional<UserEntity> searchByDni(int dni) {
-        return userEntityRepository.findByDni(dni);
+    public UserEntityDTO searchByDni(int dni) throws UserNotFoundException {
+        Optional<UserEntity> maybeUser = userEntityRepository.findByDni(dni);
+        if (maybeUser.isEmpty())
+            throw new UserNotFoundException(String.format("The user with dni %d not exists",dni));
+        UserEntity originalUser = maybeUser.get();
+        return UserEntityMapper.entityToDto(originalUser);
     }
 
 
@@ -60,47 +56,72 @@ public class UserEntityService implements IUserEntityService {
     }
 
     @Override
-    public UserEntityDTO updateUserEntity(UserEntity user, String key) {
+    public UserEntityDTO updateUserEntity(UserEntityDTO userDto) {
         // First: We need to verify that this user is in the database. Handle error if user not exists
-        Optional<UserEntity> maybeUser = userEntityRepository.findById(user.getUserId());
+        Optional<UserEntity> maybeUser = userEntityRepository.findById(userDto.getUserId());
 
-        // Return a exception
-        if (maybeUser.isEmpty()) throw new UserNotFoundException(String.format("User not exists", user.getUserId()));
+        if (maybeUser.isEmpty())
+            throw new UserNotFoundException(String.format("User with id %d not exists", userDto.getUserId()));
 
         // Second: Verify that the key is the same, Handle the error that the user key isn't the same
         UserEntity originalUser = maybeUser.get();
+        String originalUserKey = originalUser.getUserKey();
+        String key = userDto.getUserKey();
 
-        // Return a exception
-        if (!originalUser.getUserKey().equals(key))
-            throw new UserNotFoundException(String.format("The Keys don't match: %s =/ %s",key,user.getUserKey()));
+        if (!originalUser.getUserKey().equals(userDto.getUserKey()))
+            throw new UserNotFoundException(String.format("The Keys don't match: %s =/ %s",key,originalUserKey));
 
         // Thrid: Update user
-        return UserEntityMapper.entityToDto(userEntityRepository.save(user));
+        UserEntity updatedUser = userEntityRepository.save(UserEntityMapper.dtoToEntity(userDto));
+        return UserEntityMapper.entityToDto(updatedUser);
 
     }
 
+
     @Override
-    public UserEntityDTO deleteUserEntity(Long id, String key) throws UserNotFoundException {
+    public UserEntityDTO logicalDeletionUserEntity(UserEntityDTO userDto)
+            throws UserNotFoundException {
         // First: We seek user by id
+        Long id = userDto.getUserId();
+        String key = userDto.getUserKey();
         Optional<UserEntity> maybeUser = userEntityRepository.findById(id);
 
         // Return a exception
-        if (maybeUser.isEmpty())
-            throw new UserNotFoundException("User not exists to delete.");
+        if (maybeUser.isEmpty()) throw new UserNotFoundException("User not exists to delete.");
 
         // Second: Verify that the key is the same, Handle the error that the user key isn't the same
         UserEntity originalUser = maybeUser.get();
 
         // Return a exception
-        if (!originalUser.getUserKey().equals(key))
-            throw new UserNotFoundException("The keys are not equals");
-
-        // Thrid: We delete user
-//        userEntityRepository.deleteById(id);
+        if (!originalUser.getUserKey().equals(key)) throw new UserNotFoundException("The keys are not equals");
 
         originalUser.setUserStatus(false);
 
-        UserEntityDTO userDto = UserEntityMapper.entityToDto(userEntityRepository.save(originalUser));
-        return userDto;
+        UserEntityDTO deletedUser = UserEntityMapper.entityToDto(userEntityRepository.save(originalUser));
+        return deletedUser;
     }
+
+
+    @Override
+    public void deleteUserEntity(UserEntityDTO userDto)
+            throws UserNotFoundException {
+        // First: We seek user by id
+        Long id = userDto.getUserId();
+        String key = userDto.getUserKey();
+        Optional<UserEntity> maybeUser = userEntityRepository.findById(id);
+
+        // Return a exception
+        if (maybeUser.isEmpty()) throw new UserNotFoundException("User not exists to delete.");
+
+        // Second: Verify that the key is the same, Handle the error that the user key isn't the same
+        UserEntity originalUser = maybeUser.get();
+
+        // Return a exception
+        if (!originalUser.getUserKey().equals(key)) throw new UserNotFoundException("The keys are not equals");
+
+        // Thrid: We delete user
+        userEntityRepository.deleteById(id);
+
+    }
+
 }

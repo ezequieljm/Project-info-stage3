@@ -2,8 +2,6 @@ package com.info.groove.controllers;
 
 import com.info.groove.dto.UserEntityDTO;
 import com.info.groove.entity.UserEntity;
-import com.info.groove.exceptions.UserNotFoundException;
-import com.info.groove.mapper.UserEntityMapper;
 import com.info.groove.service.IUserEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +12,6 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -53,40 +49,23 @@ public class UserController {
             @PathVariable String lastname
     ){
         Map<String,Object> response = new HashMap<String,Object>();
-        UserEntity user = userEntityService.searchByFullname(firstname, lastname);
-
-        response.put(
-                String.format("User with fullname: %s %s",firstname, lastname),
-                UserEntityMapper.entityToDto(user)
-        );
-
+        UserEntityDTO userDto = userEntityService.searchByFullname(firstname, lastname);
+        response.put( String.format("User with fullname: %s %s",firstname, lastname),userDto);
         return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
     }
 
     @GetMapping(value = "/{dni}")
-    public ResponseEntity<Map<String,Object>> getUserWithDni(@PathVariable int dni){
-
+    public ResponseEntity<Map<String,Object>> getUserWithDni(
+            @PathVariable int dni
+    ){
         Map<String,Object> response = new HashMap<String,Object>();
-        Optional<UserEntity> user = userEntityService.searchByDni(dni);
-
-        /*
-        * In this case we return an exception within the controller because we're work with optional objects
-        * First we ask is it's empty and then we solve
-        * */
-        if (user.isEmpty()) throw new UserNotFoundException(String.format("User with dni %s not exists", dni));
-
-        UserEntity originalUser = user.get();
-
-        response.put(
-                String.format("User with dni %s",dni),
-                UserEntityMapper.entityToDto(originalUser)
-        );
-
+        UserEntityDTO userDto = userEntityService.searchByDni(dni);
+        response.put( String.format("User with dni %s",dni),userDto);
         return new ResponseEntity<Map<String,Object>>(response,HttpStatus.OK);
     }
 
 
-    @PostMapping(value = "/register/")
+    @PostMapping(value = "/register")
     public ResponseEntity<Map<String,Object>> registerUser(
             @RequestBody @Valid UserEntityDTO userDto
     ) {
@@ -96,14 +75,12 @@ public class UserController {
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/update/{key}")
+    @PutMapping(value = "/update")
     public ResponseEntity<Map<String,Object>> updateUser(
-            @RequestBody UserEntityDTO userDto,
-            @PathVariable String key
+            @RequestBody @Valid UserEntityDTO userDto
     ) {
         Map<String,Object> response = new HashMap<>();
-        UserEntityDTO updatedUser = userEntityService.updateUserEntity(UserEntityMapper.dtoToEntity(userDto), key);
-
+        UserEntityDTO updatedUser = userEntityService.updateUserEntity(userDto);
         response.put("Update user: ", updatedUser);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
@@ -111,22 +88,23 @@ public class UserController {
 
 
     // Logical deletion
-    @PutMapping(value = "/delete/{id}/{key}")
+    @PutMapping(value = "/delete")
     public ResponseEntity<Map<String,Object>> deleteUser(
-            @PathVariable Long id,
-            @PathVariable String key
+            @RequestBody @Valid UserEntityDTO userDto
     ) {
         Map<String,Object> response = new HashMap<>();
-        UserEntityDTO userDto = userEntityService.deleteUserEntity(id,key);
-        response.put(String.format("User with id %s deleted", id), userDto);
+        UserEntityDTO user = userEntityService.logicalDeletionUserEntity(userDto);
+        response.put(String.format("User with id %s deleted", user.getUserId()), user);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/{id}/{key}")
-    public ResponseEntity<Map<String,Object>> permanentDeletionUser(@PathVariable Long id, @PathVariable String key) {
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Map<String,Object>> permanentDeletionUser(
+            @RequestBody @Valid UserEntityDTO userDto
+    ) {
         Map<String,Object> response = new HashMap<>();
-        userEntityService.deleteUserEntity(id,key);
-        response.put(String.format("User with id %s deleted", id), null);
+        userEntityService.deleteUserEntity(userDto);
+        response.put(String.format("User with id %s deleted", userDto.getUserId()), null);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 

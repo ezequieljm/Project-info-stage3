@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IUserEntityService {
-    public UserEntity searchByFullname(String firstname, String lastname);
+    public UserEntityDTO searchByFullname(String firstname, String lastname);
 
-    public Optional<UserEntity> searchByDni(int dni);
+    public UserEntityDTO searchByDni(int dni);
 
     public List<UserEntity> searchAllUsers();
 
@@ -18,8 +18,10 @@ public interface IUserEntityService {
 
     public UserEntityDTO save(UserEntityDTO userEntityDto);
 
-    public UserEntityDTO updateUserEntity(UserEntity user, String key);
+    public UserEntityDTO updateUserEntity(UserEntityDTO userDto);
 
-    public UserEntityDTO deleteUserEntity(Long id, String key) throws UserNotFoundException;
+    public UserEntityDTO logicalDeletionUserEntity(UserEntityDTO userDto) throws UserNotFoundException;
+
+    public void deleteUserEntity(UserEntityDTO userDto) throws  UserNotFoundException;
 
 }
