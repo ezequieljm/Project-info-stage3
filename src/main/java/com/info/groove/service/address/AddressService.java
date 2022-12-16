@@ -1,4 +1,4 @@
-package com.info.groove.service;
+package com.info.groove.service.address;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

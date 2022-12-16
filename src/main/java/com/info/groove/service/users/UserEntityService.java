@@ -1,10 +1,11 @@
-package com.info.groove.service;
+package com.info.groove.service.users;
 
 import com.info.groove.dto.UserEntityDTO;
 import com.info.groove.entity.UserEntity;
 import com.info.groove.exceptions.UserNotFoundException;
 import com.info.groove.mapper.UserEntityMapper;
 import com.info.groove.repository.IUserEntityRepository;
+import com.info.groove.service.users.IUserEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

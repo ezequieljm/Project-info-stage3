@@ -21,9 +21,9 @@ public class EventDTO {
     @NotNull(message = "Name cannot be null")
     private String eventName;
 
-    @NotNull(message = "Status cannot be null")
     @Pattern(regexp = "^[0,1]$")
-    private int eventStatus;
+    @NotNull(message = "Status cannot be null")
+    private boolean eventStatus;
 
     @NotNull(message = "Date cannot be null")
     private Date creationDate;
@@ -34,7 +34,8 @@ public class EventDTO {
     public EventDTO() { }
 
 
-    public EventDTO(Long eventId, Organization organization, Address address, String eventName, int eventStatus, Date creationDate, String eventType) {
+    public EventDTO(Long eventId, Organization organization, Address address, String eventName,
+                    boolean eventStatus, Date creationDate, String eventType) {
         this.eventId = eventId;
         this.organization = organization;
         this.address = address;
@@ -76,11 +77,11 @@ public class EventDTO {
         this.eventName = eventName;
     }
 
-    public int getEventStatus() {
+    public boolean getEventStatus() {
         return eventStatus;
     }
 
-    public void setEventStatus(int eventStatus) {
+    public void setEventStatus(boolean eventStatus) {
         this.eventStatus = eventStatus;
     }
 

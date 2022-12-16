@@ -1,4 +1,4 @@
-package com.info.groove.service;
+package com.info.groove.service.users;
 
 import com.info.groove.dto.UserEntityDTO;
 import com.info.groove.entity.UserEntity;

@@ -2,7 +2,7 @@ package com.info.groove.controllers;
 
 import com.info.groove.dto.UserEntityDTO;
 import com.info.groove.entity.UserEntity;
-import com.info.groove.service.IUserEntityService;
+import com.info.groove.service.users.IUserEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

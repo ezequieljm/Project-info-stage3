@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.info.groove.dto.OrganizationDTO;
 import com.info.groove.mapper.OrganizationMapper;
-import com.info.groove.service.OrganizationService;
+import com.info.groove.service.organizations.OrganizationService;
 
 import javax.validation.Valid;
 

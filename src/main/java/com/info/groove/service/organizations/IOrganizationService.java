@@ -1,4 +1,4 @@
-package com.info.groove.service;
+package com.info.groove.service.organizations;
 
 import java.util.List;
 

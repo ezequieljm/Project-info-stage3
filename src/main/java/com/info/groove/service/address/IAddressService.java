@@ -1,4 +1,4 @@
-package com.info.groove.service;
+package com.info.groove.service.address;
 
 import com.info.groove.dto.AddressDTO;
 

@@ -35,6 +35,10 @@ public class Address {
     @NotNull(message = "Street number cannot be null")
     private int streetNumber;
 
+    @Column(name = "available")
+    @NotNull(message = "State is null")
+    private boolean addressAvailable;
+
     /*
      * Constructors
      */
@@ -42,12 +46,13 @@ public class Address {
     public Address() {
     }
 
-    public Address(String country, String state, String city, String street, int streetNumber) {
+    public Address(String country, String state, String city, String street, int streetNumber, boolean addressAvailable) {
         this.country = country;
         this.state = state;
         this.city = city;
         this.street = street;
         this.streetNumber = streetNumber;
+        this.addressAvailable = addressAvailable;
     }
 
     /*
@@ -101,4 +106,11 @@ public class Address {
         this.streetNumber = streetNumber;
     }
 
+    public boolean getAddressAvailable() {
+        return addressAvailable;
+    }
+
+    public void setAddressAvailable(boolean addressAvailable) {
+        this.addressAvailable = addressAvailable;
+    }
 }
