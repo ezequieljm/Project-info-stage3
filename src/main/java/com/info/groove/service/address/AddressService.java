@@ -21,12 +21,23 @@ public class AddressService implements IAddressService {
     }
 
     @Override
-    public AddressDTO save(AddressDTO address) {
-        Address commonAddress = AddressMapper.dtoToEntity(address);
+    public AddressDTO save(AddressDTO addressDto) {
+        // Control if address exists
+        List<Address> addressList = addressReposotory.findAll();
+        for (Address address : addressList) {
+            if (address.getCity().equals(addressDto.getCity()) &&
+            address.getCountry().equals(addressDto.getCountry()) &&
+            address.getState().equals(addressDto.getState()) &&
+            address.getStreet().equals(addressDto.getStreet()) &&
+            address.getStreetNumber() == addressDto.getStreetNumber()) {
+                throw new RuntimeException("Address already exists");
+            }
+        }
+        Address commonAddress = AddressMapper.dtoToEntity(addressDto);
         commonAddress.setAddressAvailable(true);
         commonAddress = addressReposotory.save(commonAddress);
-        address = AddressMapper.entityToDTO(commonAddress);
-        return address;
+        addressDto = AddressMapper.entityToDTO(commonAddress);
+        return addressDto;
     }
 
 }
