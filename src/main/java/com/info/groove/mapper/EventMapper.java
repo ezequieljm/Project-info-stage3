@@ -1,7 +1,11 @@
 package com.info.groove.mapper;
 
+import com.info.groove.dto.AddressDTO;
 import com.info.groove.dto.EventDTO;
+import com.info.groove.dto.OrganizationDTO;
+import com.info.groove.entity.Address;
 import com.info.groove.entity.Event;
+import com.info.groove.entity.Organization;
 
 public class EventMapper {
     public static Event dtoToEntity(EventDTO eventDto) {
@@ -12,10 +16,14 @@ public class EventMapper {
         event.setEventId(eventDto.getEventId());
         event.setEventName(eventDto.getEventName());
         event.setEventStatus(eventDto.getEventStatus());
-        event.setAddress(eventDto.getAddress());
-        event.setOrganization(eventDto.getOrganization());
         event.setCreationDate(eventDto.getCreationDate());
         event.setEventType(eventDto.getEventType());
+
+        Address address = AddressMapper.dtoToEntity(eventDto.getAddress());
+        event.setAddress(address);
+
+        Organization org = OrganizationMapper.dtoToEntity(eventDto.getOrganization());
+        event.setOrganization(org);
 
         return event;
     }
@@ -26,12 +34,16 @@ public class EventMapper {
         EventDTO foo = new EventDTO();
 
         foo.setEventId(event.getEventId());
-        foo.setAddress(event.getAddress());
         foo.setEventName(event.getEventName());
-        foo.setOrganization(event.getOrganization());
         foo.setCreationDate(event.getCreationDate());
         foo.setEventStatus(event.getEventStatus());
         foo.setEventType(event.getEventType());
+
+        AddressDTO addressDto = AddressMapper.entityToDTO(event.getAddress());
+        foo.setAddress(addressDto);
+
+        OrganizationDTO orgDto = OrganizationMapper.entityToDTO(event.getOrganization());
+        foo.setOrganization(orgDto);
 
         return foo;
     }

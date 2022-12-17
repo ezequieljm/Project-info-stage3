@@ -1,48 +1,54 @@
 package com.info.groove.dto;
 
-import com.info.groove.entity.Address;
-import com.info.groove.entity.Organization;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import java.util.Date;
+import java.io.Serial;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
-public class EventDTO {
+public class EventDTO implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
+
 
     @NotNull(message = "Id cannot be null")
     private Long eventId;
 
-    @NotNull(message = "Cannot be null")
-    private Organization organization;
-
-    @NotNull(message = "Cannot be null")
-    private Address address;
-
     @NotNull(message = "Name cannot be null")
     private String eventName;
 
-    @Pattern(regexp = "^[0,1]$")
     @NotNull(message = "Status cannot be null")
     private boolean eventStatus;
 
     @NotNull(message = "Date cannot be null")
-    private Date creationDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime creationDate;
 
     @NotNull(message = "Type cannot be null")
     private String eventType;
 
+    @NotNull(message = "Cannot be null")
+    private OrganizationDTO organization;
+
+    @NotNull(message = "Cannot be null")
+    private AddressDTO address;
+
     public EventDTO() { }
 
-
-    public EventDTO(Long eventId, Organization organization, Address address, String eventName,
-                    boolean eventStatus, Date creationDate, String eventType) {
+    public EventDTO(Long eventId, String eventName, boolean eventStatus, LocalDateTime creationDate, String eventType,
+                    OrganizationDTO organization, AddressDTO address) {
         this.eventId = eventId;
-        this.organization = organization;
-        this.address = address;
         this.eventName = eventName;
         this.eventStatus = eventStatus;
         this.creationDate = creationDate;
         this.eventType = eventType;
+        this.organization = organization;
+        this.address = address;
     }
 
     public Long getEventId() {
@@ -51,22 +57,6 @@ public class EventDTO {
 
     public void setEventId(Long eventId) {
         this.eventId = eventId;
-    }
-
-    public Organization getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public String getEventName() {
@@ -85,11 +75,11 @@ public class EventDTO {
         this.eventStatus = eventStatus;
     }
 
-    public Date getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -99,5 +89,21 @@ public class EventDTO {
 
     public void setEventType(String eventType) {
         this.eventType = eventType;
+    }
+
+    public OrganizationDTO getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(OrganizationDTO organization) {
+        this.organization = organization;
+    }
+
+    public AddressDTO getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressDTO address) {
+        this.address = address;
     }
 }

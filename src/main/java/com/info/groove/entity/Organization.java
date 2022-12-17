@@ -6,10 +6,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity(name = "organizations")
-public class Organization {
+public class Organization implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     /*
      * Attributes
      */

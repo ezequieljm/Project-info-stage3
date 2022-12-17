@@ -1,12 +1,15 @@
 package com.info.groove.dto;
 
-import com.info.groove.entity.Address;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.io.Serial;
+import java.io.Serializable;
 
-public class OrganizationDTO {
+public class OrganizationDTO implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @NotNull(message = "Id cannot be null")
     private Long orgId;

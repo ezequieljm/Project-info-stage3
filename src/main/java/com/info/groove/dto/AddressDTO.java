@@ -2,8 +2,13 @@ package com.info.groove.dto;
 
 
 import javax.validation.constraints.NotNull;
+import java.io.Serial;
+import java.io.Serializable;
 
-public class AddressDTO {
+public class AddressDTO implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     @NotNull(message = "Country cannot be null")
     private String country;

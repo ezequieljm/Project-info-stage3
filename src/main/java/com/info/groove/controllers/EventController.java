@@ -23,7 +23,18 @@ public class EventController {
 
     @GetMapping
     public String helloEvents() {
+
         return "Hello events";
+    }
+
+    @PostMapping(value = "/register")
+    public ResponseEntity<Map<String,Object>> registerEvent(
+            @RequestBody @Valid EventDTO eventDto
+    ) {
+        Map<String,Object> response = new HashMap<>();
+        EventDTO storedEvent = eventService.register(eventDto);
+        response.put("Events of Organization", storedEvent);
+        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
     @GetMapping(value = "/all")
@@ -44,15 +55,6 @@ public class EventController {
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/register")
-    public ResponseEntity<Map<String,Object>> registerEvent(
-            @RequestBody @Valid EventDTO newEvent
-    ) {
-        Map<String,Object> response = new HashMap<String, Object>();
-        EventDTO storedEvent = eventService.save(newEvent);
-        response.put("Events of Organization", storedEvent);
-        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
-    }
 
     @PutMapping(value = "/update")
     public ResponseEntity<Map<String,Object>> updateEvent(

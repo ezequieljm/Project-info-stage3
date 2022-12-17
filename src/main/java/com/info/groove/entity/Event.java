@@ -1,14 +1,17 @@
 package com.info.groove.entity;
 
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "events")
-public class Event {
+public class Event implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     /*
      * Attributes
      */
@@ -16,16 +19,6 @@ public class Event {
     @Id
     @Column(name = "event_id")
     private Long eventId;
-
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "org_id")
-    @NotNull(message = "Cannot be null")
-    private Organization organization;
-
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id")
-    @NotNull(message = "Cannot be null")
-    private Address address;
 
     @Column(name = "event_name")
     @NotNull(message = "Name cannot be null")
@@ -38,11 +31,22 @@ public class Event {
 
     @Column(name = "creation_date")
     @NotNull(message = "Date cannot be null")
-    private Date creationDate;
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime creationDate;
 
     @Column(name = "event_type")
     @NotNull(message = "Type cannot be null")
     private String eventType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "org_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Organization organization;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Address address;
 
     /*
      * Constructors
@@ -51,7 +55,7 @@ public class Event {
     }
 
     public Event(Organization organization, Address address, String eventName, boolean eventStatus,
-                 Date creationDate, String eventType) {
+                 LocalDateTime creationDate, String eventType) {
         this.organization = organization;
         this.address = address;
         this.eventName = eventName;
@@ -103,11 +107,11 @@ public class Event {
         this.eventStatus = eventStatus;
     }
 
-    public Date getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 

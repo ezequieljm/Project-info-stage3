@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import com.info.groove.dto.AddressDTO;
 import com.info.groove.exceptions.DuplicateDataError;
 import com.info.groove.mapper.AddressMapper;
-import com.info.groove.service.organizations.IOrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

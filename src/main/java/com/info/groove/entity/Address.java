@@ -3,10 +3,12 @@ package com.info.groove.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity(name = "address")
-public class Address {
+public class Address implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     /*
      * Attributes
      */

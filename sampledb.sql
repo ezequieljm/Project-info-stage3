@@ -11,3 +11,8 @@ values(1, "30-98765412-4", "nirvana@gmail.com", "kurtcobain", "Nirvana",1, "3465
 (2, "30-87512378-4", "limpbizkit@gmail.com", "freddurts", "Limp Bizkit",1, "34656427654", 4),
 (3, "30-12345678-4", "greenday@gmail.com", "billiejoel", "Green Day",1, "55551987654", 3),
 (4, "30-67236710-4", "rhcp@gmail.com", "rhcp", "Red Hot Chilli Peppers",1, "34651987654", 5);
+
+insert into address (address_id,available, city, country, state, street,street_number)
+values (2,1,"Aberdeen", "Unite States", "Washington", "123 Grunge", 123);
+insert into events(event_id,event_name,event_status,creation_date,event_type,org_id,address_id)
+values(1,"Globant happy new year everyone",1,"2022-8-21 23:00:05","Unique",1,2);

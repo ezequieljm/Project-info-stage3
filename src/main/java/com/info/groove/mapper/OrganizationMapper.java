@@ -16,13 +16,14 @@ public class OrganizationMapper {
         foo.setOrgId(orgDto.getOrgId());
         foo.setCuit(orgDto.getCuit());
         foo.setEmail(orgDto.getEmail());
-        Address address = AddressMapper.dtoToEntity(orgDto.getAddress());
-        foo.setAddress(address);
         foo.setOrgName(orgDto.getOrgName());
         foo.setOrgKey(orgDto.getOrgKey());
         foo.setPhone(orgDto.getPhone());
         foo.setOrgStatus(orgDto.getOrgStatus());
-        
+
+        Address address = AddressMapper.dtoToEntity(orgDto.getAddress());
+        foo.setAddress(address);
+
         return foo;
 
     }
@@ -37,13 +38,14 @@ public class OrganizationMapper {
         foo.setOrgId(organization.getOrgId());
         foo.setCuit(organization.getCuit());
         foo.setEmail(organization.getEmail());
-        AddressDTO addressDto = AddressMapper.entityToDTO(organization.getAddress());
-        foo.setAddress(addressDto);
         foo.setOrgName(organization.getOrgName());
         foo.setOrgKey(organization.getOrgKey());
         foo.setPhone(organization.getPhone());
         foo.setOrgStatus(organization.getOrgStatus());
-        
+
+        AddressDTO addressDto = AddressMapper.entityToDTO(organization.getAddress());
+        foo.setAddress(addressDto);
+
         return foo;
     }
 }
