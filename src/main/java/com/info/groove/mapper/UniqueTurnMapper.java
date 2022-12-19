@@ -1,7 +1,11 @@
 package com.info.groove.mapper;
 
+import com.info.groove.dto.EventDTO;
 import com.info.groove.dto.UniqueTurnDTO;
+import com.info.groove.dto.UserEntityDTO;
+import com.info.groove.entity.Event;
 import com.info.groove.entity.UniqueTurn;
+import com.info.groove.entity.UserEntity;
 
 public class UniqueTurnMapper {
 
@@ -9,13 +13,16 @@ public class UniqueTurnMapper {
         if (uniqueTurnDTO == null) return new UniqueTurn();
 
         UniqueTurn uniqueTurn = new UniqueTurn();
-
         uniqueTurn.setTurnId(uniqueTurnDTO.getTurnId());
-        uniqueTurn.setEvent(uniqueTurnDTO.getEvent());
-        uniqueTurn.setUser(uniqueTurnDTO.getUser());
         uniqueTurn.setTurnDate(uniqueTurnDTO.getTurnDate());
         uniqueTurn.setTurnStatus(uniqueTurnDTO.getTurnStatus());
         uniqueTurn.setKeyValue(uniqueTurnDTO.getKeyValue());
+
+        Event event = EventMapper.dtoToEntity(uniqueTurnDTO.getEvent());
+        uniqueTurn.setEvent(event);
+
+        UserEntity user = UserEntityMapper.dtoToEntity(uniqueTurnDTO.getUser());
+        uniqueTurn.setUser(user);
 
         return uniqueTurn;
     }
@@ -26,11 +33,15 @@ public class UniqueTurnMapper {
         UniqueTurnDTO uniqueTurnDTO = new UniqueTurnDTO();
 
         uniqueTurnDTO.setTurnId(uniqueTurn.getTurnId());
-        uniqueTurnDTO.setEvent(uniqueTurn.getEvent());
-        uniqueTurnDTO.setUser(uniqueTurn.getUser());
         uniqueTurnDTO.setTurnDate(uniqueTurn.getTurnDate());
         uniqueTurnDTO.setTurnStatus(uniqueTurn.getTurnStatus());
         uniqueTurnDTO.setKeyValue(uniqueTurn.getKeyValue());
+
+        EventDTO eventDto = EventMapper.entityToDto(uniqueTurn.getEvent());
+        uniqueTurnDTO.setEvent(eventDto);
+
+        UserEntityDTO userDto = UserEntityMapper.entityToDto(uniqueTurn.getUser());
+        uniqueTurnDTO.setUser(userDto);
 
         return uniqueTurnDTO;
     }

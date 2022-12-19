@@ -1,0 +1,1092 @@
+{
+	"info": {
+		"_postman_id": "4c569be4-c44a-4e55-89fc-d947511d0a5f",
+		"name": "Info stage 3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14289701"
+	},
+	"item": [
+		{
+			"name": "Organizations",
+			"item": [
+				{
+					"name": "Hello world",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/organization/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"organization",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read all organizations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/organization/all/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"organization",
+								"all",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/organization/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"organization",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/organization/org-name/Eminem",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"organization",
+								"org-name",
+								"Eminem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by cuit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/organization/org-cuit/30-12345678-4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"organization",
+								"org-cuit",
+								"30-12345678-4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register an organization",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"orgId\": 1,\n      \"email\": \"needForSpeed@gmail.com\",\n      \"orgName\": \"Electronic Games S.A\",\n      \"phone\": \"98763471256\",\n      \"cuit\": \"30-78523409-4\",\n      \"orgKey\": \"needforspeed\",\n      \"orgStatus\":true,\n      \"address\": {\n        \"country\": \"Unite States\",\n        \"state\": \"Nuevo Mexico\",\n        \"city\": \"Texas\",\n        \"street\": \"High way\",\n        \"streetNumber\": 66\n      }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/organization/register/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"organization",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register with available address",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"orgId\": 3,\n      \"email\": \"eminem@gmail.com\",\n      \"orgName\": \"Eminem\",\n      \"phone\": \"39898723489\",\n      \"cuit\": \"30-78563409-4\",\n      \"orgKey\": \"eminemrap\",\n      \"orgStatus\": true,\n      \"address\": {\n        \"country\":\"United States\",\n        \"state\":\"California\",\n        \"city\":\"Los Angeles\",\n        \"street\":\"Skins roads\",\n        \"streetNumber\":124\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/organization/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"organization",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register but not available address",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n      \"orgId\": 2,\n      \"email\": \"forzaHorizon@gmail.com\",\n      \"orgName\": \"New Horizon S.A\",\n      \"phone\": \"98763471742\",\n      \"cuit\": \"30-78522368-4\",\n      \"orgKey\": \"forzahorizon\",\n      \"orgStatus\": true,\n      \"address\": {\n        \"country\": \"Unite States\",\n        \"state\": \"Nuevo Mexico\",\n        \"city\": \"Texas\",\n        \"street\": \"High way\",\n        \"streetNumber\": 66\n      }\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/organization/register/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"organization",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an organization",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orgId\": 3,\n    \"email\": \"newEminemEmail@gmail.com\",\n    \"orgName\": \"Eminem\",\n    \"phone\": \"78236712760\",\n    \"cuit\": \"30-78563409-4\",\n    \"orgKey\": \"eminemrap\",\n    \"orgStatus\": true,\n    \"address\": {\n        \"addressId\": 6,\n        \"country\": \"Unite States\",\n        \"state\": \"Michigan\",\n        \"city\": \"Detroit\",\n        \"street\": \"8 mile\",\n        \"streetNumber\": 313\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/organization/update/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"organization",
+								"update",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logical deletion",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orgId\": 3,\n    \"email\": \"eminem@gmail.com\",\n    \"orgName\": \"Eminem\",\n    \"phone\": \"39898723489\",\n    \"cuit\": \"30-78563409-4\",\n    \"orgKey\": \"eminemrap\",\n    \"orgStatus\": true,\n    \"address\": {\n        \"addressId\": 6,\n        \"country\": \"Unite States\",\n        \"state\": \"Michigan\",\n        \"city\": \"Detroit\",\n        \"street\": \"8 mile\",\n        \"streetNumber\": 313\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/organization/delete/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"organization",
+								"delete",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an organization",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Hello world",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/event/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read all events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/event/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by organization",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/event/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register a new event",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"eventId\": 1,\n    \"eventName\": \"Globant happy new year everyone\",\n    \"eventStatus\": true,\n    \"creationDate\":\"2022-8-21 23:00:05\",\n    \"eventType\":\"Unique\",\n    \"organization\": {\n      \"orgId\": 1,\n      \"email\": \"needForSpeed@gmail.com\",\n      \"orgName\": \"Electronic Games S.A\",\n      \"phone\": \"98763471256\",\n      \"cuit\": \"30-78523409-4\",\n      \"orgKey\": \"needforspeed\",\n      \"orgStatus\": true,\n      \"address\": {\n        \"country\": \"Unite States\",\n        \"state\": \"Nuevo Mexico\",\n        \"city\": \"Texas\",\n        \"street\": \"High way\",\n        \"streetNumber\": 66\n      }\n    },\n    \"address\":  {\n        \"country\": \"Unite States\",\n        \"state\": \"Washington\",\n        \"city\": \"Aberdeen\",\n        \"street\": \"123 Grunge\",\n        \"streetNumber\":123\n    }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/event/register/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update event",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"eventId\": 1,\n            \"eventName\": \"California rest my priest\",\n            \"eventStatus\": true,\n            \"creationDate\": \"2022-08-21 23:00:05\",\n            \"eventType\": \"Unique\",\n            \"organization\": {\n                \"orgId\": 1,\n                \"email\": \"needForSpeed@gmail.com\",\n                \"orgName\": \"Electronic Games S.A\",\n                \"phone\": \"98763471256\",\n                \"cuit\": \"30-78523409-4\",\n                \"orgKey\": \"needforspeed\",\n                \"orgStatus\": true,\n                \"address\": {\n                    \"addressId\": 1,\n                    \"country\": \"Unite States\",\n                    \"state\": \"Nuevo Mexico\",\n                    \"city\": \"Texas\",\n                    \"street\": \"High way\",\n                    \"streetNumber\": 66,\n                    \"addressAvailable\": false\n                }\n            },\n            \"address\": {\n                \"addressId\": 2,\n                \"country\": \"Unite States\",\n                \"state\": \"Washington\",\n                \"city\": \"Aberdeen\",\n                \"street\": \"123 Grunge\",\n                \"streetNumber\": 123,\n                \"addressAvailable\": true\n            }\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/event/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logical deletion of event",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"eventId\": 1,\n            \"eventName\": \"California rest my priest\",\n            \"eventStatus\": true,\n            \"creationDate\": \"2022-08-21 23:00:05\",\n            \"eventType\": \"Unique\",\n            \"organization\": {\n                \"orgId\": 1,\n                \"email\": \"needForSpeed@gmail.com\",\n                \"orgName\": \"Electronic Games S.A\",\n                \"phone\": \"98763471256\",\n                \"cuit\": \"30-78523409-4\",\n                \"orgKey\": \"needforspeed\",\n                \"orgStatus\": true,\n                \"address\": {\n                    \"addressId\": 1,\n                    \"country\": \"Unite States\",\n                    \"state\": \"Nuevo Mexico\",\n                    \"city\": \"Texas\",\n                    \"street\": \"High way\",\n                    \"streetNumber\": 66,\n                    \"addressAvailable\": false\n                }\n            },\n            \"address\": {\n                \"addressId\": 2,\n                \"country\": \"Unite States\",\n                \"state\": \"Washington\",\n                \"city\": \"Aberdeen\",\n                \"street\": \"123 Grunge\",\n                \"streetNumber\": 123,\n                \"addressAvailable\": true\n            }\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/event/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"eventId\": 1,\n            \"eventName\": \"Globant happy new year everyone\",\n            \"eventStatus\": true,\n            \"creationDate\": \"2022-08-21 23:00:05\",\n            \"eventType\": \"Unique\",\n            \"organization\": {\n                \"orgId\": 1,\n                \"email\": \"needForSpeed@gmail.com\",\n                \"orgName\": \"Electronic Games S.A\",\n                \"phone\": \"98763471256\",\n                \"cuit\": \"30-78523409-4\",\n                \"orgKey\": \"needforspeed\",\n                \"orgStatus\": true,\n                \"address\": {\n                    \"addressId\": 1,\n                    \"country\": \"Unite States\",\n                    \"state\": \"Nuevo Mexico\",\n                    \"city\": \"Texas\",\n                    \"street\": \"High way\",\n                    \"streetNumber\": 66,\n                    \"addressAvailable\": false\n                }\n            },\n            \"address\": {\n                \"addressId\": 2,\n                \"country\": \"Unite States\",\n                \"state\": \"Washington\",\n                \"city\": \"Aberdeen\",\n                \"street\": \"123 Grunge\",\n                \"streetNumber\": 123,\n                \"addressAvailable\": true\n            }\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/event/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Unique events",
+			"item": [
+				{
+					"name": "Hello unique turns",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/unique/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"unique",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read turns by organization",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/unique/all/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"unique",
+								"all",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read turns by organization and event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/unique/all/1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"unique",
+								"all",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register a new unique turn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"turnId\":1,\n    \"event\": {\n        \"orgId\":1,\n        \"email\": \"needForSpeed@gmail.com\",\n        \"orgName\": \"Electronic Games S.A\",\n        \"phone\": \"98763471256\",\n        \"cuit\": \"30-78523409-4\",\n        \"orgKey\": \"needforspeed\",\n        \"orgStatus\": true,\n        \"address\": {\n            \"country\": \"Unite States\",\n            \"state\": \"Nuevo Mexico\",\n            \"city\": \"Texas\",\n            \"street\": \"High way\",\n            \"streetNumber\": 66,\n            \"addressAvailable\": false\n        }\n    },\n    \"user\":{\n        \"userId\": 1,\n        \"country\": \"Unite States\",\n        \"state\": \"Washington\",\n        \"city\": \"Aberdeen\",\n        \"street\": \"123 Grunge\",\n        \"streetNumber\": 123,\n        \"addressAvailable\": true\n    },\n   \"turnDate\":\"2019-07-05 23:00:05\",\n   \"turnStatus\":true,\n   \"keyValue\":\"random something for unique turn\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/unique/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"unique",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update turn",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"turnId\":1,\n    \"event\": {\n        \"orgId\":1,\n        \"email\": \"needForSpeed@gmail.com\",\n        \"orgName\": \"Electronic Games S.A\",\n        \"phone\": \"98763471256\",\n        \"cuit\": \"30-78523409-4\",\n        \"orgKey\": \"needforspeed\",\n        \"orgStatus\": true,\n        \"address\": {\n            \"country\": \"Unite States\",\n            \"state\": \"Nuevo Mexico\",\n            \"city\": \"Texas\",\n            \"street\": \"High way\",\n            \"streetNumber\": 66,\n            \"addressAvailable\": false\n        }\n    },\n    \"user\":{\n        \"country\": \"Unite States\",\n        \"state\": \"Washington\",\n        \"city\": \"Aberdeen\",\n        \"street\": \"123 Grunge\",\n        \"streetNumber\": 123,\n        \"addressAvailable\": true\n    },\n   \"turnDate\":\"2019-07-05 23:00:05\",\n   \"turnStatus\":true,\n   \"keyValue\":\"other random something for unique turn\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/unique/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"unique",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detele unique turn",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"turnId\":1,\n    \"event\": {\n        \"orgId\":1,\n        \"email\": \"needForSpeed@gmail.com\",\n        \"orgName\": \"Electronic Games S.A\",\n        \"phone\": \"98763471256\",\n        \"cuit\": \"30-78523409-4\",\n        \"orgKey\": \"needforspeed\",\n        \"orgStatus\": true,\n        \"address\": {\n            \"country\": \"Unite States\",\n            \"state\": \"Nuevo Mexico\",\n            \"city\": \"Texas\",\n            \"street\": \"High way\",\n            \"streetNumber\": 66,\n            \"addressAvailable\": false\n        }\n    },\n    \"user\":{\n        \"country\": \"Unite States\",\n        \"state\": \"Washington\",\n        \"city\": \"Aberdeen\",\n        \"street\": \"123 Grunge\",\n        \"streetNumber\": 123,\n        \"addressAvailable\": true\n    },\n   \"turnDate\":\"2019-07-05 23:00:05\",\n   \"turnStatus\":true,\n   \"keyValue\":\"random something for unique turn\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/unique/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"unique",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "Read all address",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/address/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"address",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register an address",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"country\":\"United States\",\n    \"state\":\"California\",\n    \"city\":\"Los Angeles\",\n    \"street\":\"Skins roads\",\n    \"streetNumber\":124\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/address/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"address",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Recurrent events",
+			"item": [
+				{
+					"name": "Hello recurrent turns",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/recurrent-turn",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"recurrent-turn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read all recurrent turns",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/recurrent-turn/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"recurrent-turn",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by organization",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/recurrent-turn/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"recurrent-turn",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by organization and event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/recurrent-turn/1/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"recurrent-turn",
+								"1",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register recurrent turn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"turnId\":1,\n    \"event\":{\n        \"eventId\": 1,\n        \"eventName\": \"Globant happy new year everyone\",\n        \"eventStatus\": true,\n        \"creationDate\": \"2022-08-21 23:00:05\",\n        \"eventType\": \"Unique\",\n        \"organization\": {\n            \"orgId\":1,\n            \"email\": \"needForSpeed@gmail.com\",\n            \"orgName\": \"Electronic Games S.A\",\n            \"phone\": \"98763471256\",\n            \"cuit\": \"30-78523409-4\",\n            \"orgKey\": \"needforspeed\",\n            \"orgStatus\": true,\n            \"address\": {\n                \"country\": \"Unite States\",\n                \"state\": \"Nuevo Mexico\",\n                \"city\": \"Texas\",\n                \"street\": \"High way\",\n                \"streetNumber\": 66,\n                \"addressAvailable\": false\n            }\n        },\n        \"address\": {\n            \"country\": \"Unite States\",\n            \"state\": \"Washington\",\n            \"city\": \"Aberdeen\",\n            \"street\": \"123 Grunge\",\n            \"streetNumber\": 123,\n            \"addressAvailable\": true\n        }\n    },  \n    \"user\": {\n        \"userId\": 1,\n        \"dni\": 98765412,\n        \"firstname\": \"Alisson\",\n        \"lastname\": \"Banner\",\n        \"userKey\": \"randomsomething\",\n        \"userStatus\": true\n    }, \n    \"turnDateTime\":\"2022-08-15 22:30:05\",\n    \"turnStatus\":true\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/recurrent-turn/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"recurrent-turn",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a recurrent turn",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"turnId\": 1,\n            \"event\": {\n                \"eventId\": 1,\n                \"eventName\": \"Globant happy new year everyone\",\n                \"eventStatus\": true,\n                \"creationDate\": \"2022-08-21 23:00:05\",\n                \"eventType\": \"Unique\",\n                \"organization\": {\n                    \"orgId\": 1,\n                    \"email\": \"needForSpeed@gmail.com\",\n                    \"orgName\": \"Electronic Games S.A\",\n                    \"phone\": \"98763471256\",\n                    \"cuit\": \"30-78523409-4\",\n                    \"orgKey\": \"needforspeed\",\n                    \"orgStatus\": true,\n                    \"address\": {\n                        \"addressId\": 1,\n                        \"country\": \"Unite States\",\n                        \"state\": \"Nuevo Mexico\",\n                        \"city\": \"Texas\",\n                        \"street\": \"High way\",\n                        \"streetNumber\": 66,\n                        \"addressAvailable\": false\n                    }\n                },\n                \"address\": {\n                    \"addressId\": 2,\n                    \"country\": \"Unite States\",\n                    \"state\": \"Washington\",\n                    \"city\": \"Aberdeen\",\n                    \"street\": \"123 Grunge\",\n                    \"streetNumber\": 123,\n                    \"addressAvailable\": true\n                }\n            },\n            \"user\": {\n                \"userId\": 1,\n                \"userKey\": \"randomsomething\",\n                \"firstname\": \"Alisson\",\n                \"lastname\": \"Banner\",\n                \"userStatus\": true,\n                \"dni\": 98765412\n            },\n            \"turnDateTime\": \"2022-08-15 16:30:07\",\n            \"turnStatus\": true\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/recurrent-turn/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"recurrent-turn",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logical deletion",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"turnId\": 1,\n            \"event\": {\n                \"eventId\": 1,\n                \"eventName\": \"Globant happy new year everyone\",\n                \"eventStatus\": true,\n                \"creationDate\": \"2022-08-21 23:00:05\",\n                \"eventType\": \"Unique\",\n                \"organization\": {\n                    \"orgId\": 1,\n                    \"email\": \"needForSpeed@gmail.com\",\n                    \"orgName\": \"Electronic Games S.A\",\n                    \"phone\": \"98763471256\",\n                    \"cuit\": \"30-78523409-4\",\n                    \"orgKey\": \"needforspeed\",\n                    \"orgStatus\": true,\n                    \"address\": {\n                        \"addressId\": 1,\n                        \"country\": \"Unite States\",\n                        \"state\": \"Nuevo Mexico\",\n                        \"city\": \"Texas\",\n                        \"street\": \"High way\",\n                        \"streetNumber\": 66,\n                        \"addressAvailable\": false\n                    }\n                },\n                \"address\": {\n                    \"addressId\": 2,\n                    \"country\": \"Unite States\",\n                    \"state\": \"Washington\",\n                    \"city\": \"Aberdeen\",\n                    \"street\": \"123 Grunge\",\n                    \"streetNumber\": 123,\n                    \"addressAvailable\": true\n                }\n            },\n            \"user\": {\n                \"userId\": 1,\n                \"userKey\": \"randomsomething\",\n                \"firstname\": \"Alisson\",\n                \"lastname\": \"Banner\",\n                \"userStatus\": true,\n                \"dni\": 98765412\n            },\n            \"turnDateTime\": \"2022-08-15 16:30:07\",\n            \"turnStatus\": true\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/recurrent-turn/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"recurrent-turn",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete turn",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"turnId\": 1,\n            \"event\": {\n                \"eventId\": 1,\n                \"eventName\": \"Globant happy new year everyone\",\n                \"eventStatus\": true,\n                \"creationDate\": \"2022-08-21 23:00:05\",\n                \"eventType\": \"Unique\",\n                \"organization\": {\n                    \"orgId\": 1,\n                    \"email\": \"needForSpeed@gmail.com\",\n                    \"orgName\": \"Electronic Games S.A\",\n                    \"phone\": \"98763471256\",\n                    \"cuit\": \"30-78523409-4\",\n                    \"orgKey\": \"needforspeed\",\n                    \"orgStatus\": true,\n                    \"address\": {\n                        \"addressId\": 1,\n                        \"country\": \"Unite States\",\n                        \"state\": \"Nuevo Mexico\",\n                        \"city\": \"Texas\",\n                        \"street\": \"High way\",\n                        \"streetNumber\": 66,\n                        \"addressAvailable\": false\n                    }\n                },\n                \"address\": {\n                    \"addressId\": 2,\n                    \"country\": \"Unite States\",\n                    \"state\": \"Washington\",\n                    \"city\": \"Aberdeen\",\n                    \"street\": \"123 Grunge\",\n                    \"streetNumber\": 123,\n                    \"addressAvailable\": true\n                }\n            },\n            \"user\": {\n                \"userId\": 1,\n                \"userKey\": \"randomsomething\",\n                \"firstname\": \"Alisson\",\n                \"lastname\": \"Banner\",\n                \"userStatus\": true,\n                \"dni\": 98765412\n            },\n            \"turnDateTime\": \"2022-08-15 16:30:07\",\n            \"turnStatus\": true\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/recurrent-turn/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"recurrent-turn",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Hello world",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read all active users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/all-actives",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"all-actives"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by fullname",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/fullname/Alisson/Banner",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"fullname",
+								"Alisson",
+								"Banner"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by user dni",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/98765412",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"98765412"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register a new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": 1,\n    \"dni\": 98765412,\n    \"firstname\": \"Alisson\",\n    \"lastname\": \"Banner\",\n    \"userKey\": \"randomsomething\",\n    \"userStatus\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/register/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"userId\": 1,\n            \"userKey\": \"randomsomething\",\n            \"firstname\": \"Mia\",\n            \"lastname\": \"Melano\",\n            \"userStatus\": true,\n            \"dni\": 98765412\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logical deletion",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n            \"userId\": 1,\n            \"userKey\": \"randomsomething\",\n            \"firstname\": \"Mia\",\n            \"lastname\": \"Melano\",\n            \"userStatus\": false,\n            \"dni\": 98765412\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/delete/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"delete",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n            \"userId\": 1,\n            \"userKey\": \"randomsomething\",\n            \"firstname\": \"Mia\",\n            \"lastname\": \"Melano\",\n            \"userStatus\": false,\n            \"dni\": 98765412\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

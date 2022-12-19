@@ -1,31 +1,33 @@
 package com.info.groove.dto;
 
-import com.info.groove.entity.Event;
-import com.info.groove.entity.UserEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Date;
 
-public class UniqueTurnDTO {
+public class UniqueTurnDTO implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     //Attributes
     @NotNull(message = "Id cannot be null")
     private Long turnId;
 
     @NotNull(message = "Event Cannot be null")
-    private Event event;
+    private EventDTO event;
 
     @NotNull(message = "User Cannot be null")
-    private UserEntity user;
+    private UserEntityDTO user;
 
     @NotNull(message = "Date Cannot be null")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date turnDate;
 
     @NotNull(message = "Status Cannot be null")
-    @Pattern(regexp = "^[0,1]$")
-    private int turnStatus;
+    private boolean turnStatus;
 
     @NotNull(message = "Key Cannot be null")
     private String keyValue;
@@ -34,7 +36,7 @@ public class UniqueTurnDTO {
     public UniqueTurnDTO() {
     }
 
-    public UniqueTurnDTO(Long turnId, Event event, UserEntity user, Date turnDate, int turnStatus, String keyValue) {
+    public UniqueTurnDTO(Long turnId, EventDTO event, UserEntityDTO user, Date turnDate, boolean turnStatus, String keyValue) {
         this.turnId = turnId;
         this.event = event;
         this.user = user;
@@ -52,19 +54,19 @@ public class UniqueTurnDTO {
         this.turnId = turnId;
     }
 
-    public Event getEvent() {
+    public EventDTO getEvent() {
         return event;
     }
 
-    public void setEvent(Event event) {
+    public void setEvent(EventDTO event) {
         this.event = event;
     }
 
-    public UserEntity getUser() {
+    public UserEntityDTO getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(UserEntityDTO user) {
         this.user = user;
     }
 
@@ -76,11 +78,11 @@ public class UniqueTurnDTO {
         this.turnDate = turnDate;
     }
 
-    public int getTurnStatus() {
+    public boolean getTurnStatus() {
         return turnStatus;
     }
 
-    public void setTurnStatus(int turnStatus) {
+    public void setTurnStatus(boolean turnStatus) {
         this.turnStatus = turnStatus;
     }
 

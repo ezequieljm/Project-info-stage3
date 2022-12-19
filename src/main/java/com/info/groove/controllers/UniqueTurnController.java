@@ -2,84 +2,91 @@ package com.info.groove.controllers;
 
 import com.info.groove.dto.UniqueTurnDTO;
 import com.info.groove.entity.UniqueTurn;
-import com.info.groove.service.turns.uniqueturns.IUniqueEventTurnService;
+import com.info.groove.service.turns.uniqueturns.IUniqueTurnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = UniqueEventTurnController.BASIS)
-public class UniqueEventTurnController {
+@RequestMapping(value = UniqueTurnController.BASIS)
+public class UniqueTurnController {
     public static final String BASIS = "/unique";
 
     @Autowired
-    private IUniqueEventTurnService uniqueEventTurnService;
+    private IUniqueTurnService uniqueTurnService;
 
     @GetMapping(value = "/")
     public String helloUniqueTurns() {
         return "Hello unique turn";
     }
 
-    @GetMapping(value = "/all/{id}/{key}")
+    @GetMapping(value = "/all/{id}")
+    public ResponseEntity<Map<String,Object>> getAllTurnByOrg(
+            @PathVariable Long id
+    ){
+
+        Map<String,Object> response = new HashMap<String,Object>();
+        List<UniqueTurn> turns = uniqueTurnService.searchAllUniqueTurnsByOrg(id);
+        response.put("Turn list", turns);
+        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/all/{eventId}/{orgId}")
     public ResponseEntity<Map<String,Object>> getAllTurnByEventAndOrg(
             @PathVariable Long eventId,
-            @PathVariable String orgKey
+            @PathVariable Long orgId
     ){
 
         Map<String,Object> response = new HashMap<String,Object>();
-        List<UniqueTurn> turns = uniqueEventTurnService.searchAllUniqueTurnsByOrgAndEvent(eventId,orgKey);
+        List<UniqueTurn> turns = uniqueTurnService.searchAllUniqueTurnsByOrgAndEvent(eventId,orgId);
         response.put("Turn list", turns);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/all/{key}")
-    public ResponseEntity<Map<String,Object>> getAllTurnByOrg(
-            @PathVariable Long eventId,
-            @PathVariable String orgKey
-    ){
-
-        Map<String,Object> response = new HashMap<String,Object>();
-        List<UniqueTurn> turns = uniqueEventTurnService.searchAllUniqueTurnByOrg(orgKey);
-        response.put("Turn list", turns);
-        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
-    }
-
-    @PostMapping(value = "/{orgKey}")
+    @PostMapping(value = "/register")
     public ResponseEntity<Map<String,Object>> registerTurn(
-            @RequestBody UniqueTurnDTO turnDto,
-            @PathVariable String orgKey
+            @RequestBody UniqueTurnDTO turnDto
     ) {
         Map<String,Object> response = new HashMap<String,Object>();
-        UniqueTurnDTO turn = uniqueEventTurnService.registerUniqueTurn(turnDto,orgKey);
+        UniqueTurnDTO turn = uniqueTurnService.register(turnDto);
         response.put("Stored Turn", turn);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/update/{key}")
+    @PutMapping(value = "/update")
     public ResponseEntity<Map<String,Object>> updateTurn(
-            @RequestBody UniqueTurnDTO turnDto,
-            @PathVariable String key
+            @RequestBody UniqueTurnDTO turnDto
     ) {
         Map<String,Object> response = new HashMap<String,Object>();
-        UniqueTurnDTO turn = uniqueEventTurnService.updateUniqueTurn(turnDto,key);
+        UniqueTurnDTO turn = uniqueTurnService.update(turnDto);
         response.put("Updated Turn", turn);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
     //Logic delete
-    @PutMapping(value = "/delete/{id}/{orgKey}")
+    @PutMapping(value = "/delete")
     public ResponseEntity<Map<String,Object>> deleteTurn(
-            @PathVariable Long id,
-            @PathVariable String orgKey
+            @RequestBody @Valid UniqueTurnDTO turnDto
     ) {
         Map<String,Object> response = new HashMap<String,Object>();
-        UniqueTurnDTO turnDto = uniqueEventTurnService.deleteUniqueTurn(id,orgKey);
-        response.put("Updated Turn", turnDto);
+        UniqueTurnDTO deletedTurn = uniqueTurnService.logicalDeletion(turnDto);
+        response.put("Logical deleted Turn", deletedTurn);
+        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Map<String,Object>> delete(
+            @RequestBody @Valid UniqueTurnDTO turnDto
+    ) {
+        Map<String,Object> response = new HashMap<String,Object>();
+        uniqueTurnService.delete(turnDto);
+        response.put("Deleted Turn", null);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 

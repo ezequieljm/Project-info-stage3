@@ -1,5 +1,7 @@
 package com.info.groove.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -9,19 +11,21 @@ import java.util.Date;
 public class UniqueTurn {
 
     //Attributes
-    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     @Column(name = "turn_id")
     private Long turnId;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "event_id")
     @NotNull(message = "Cannot be null")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Event event;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     @NotNull(message = "Cannot be null")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private UserEntity user;
 
     @Column(name = "turn_date")
@@ -30,8 +34,7 @@ public class UniqueTurn {
 
     @Column(name = "turn_status")
     @NotNull(message = "Cannot be null")
-    @Pattern(regexp = "^[0,1]$")
-    private int turnStatus;
+    private boolean turnStatus;
 
     @Column(name = "key_value")
     @NotNull(message = "Cannot be null")
@@ -40,7 +43,7 @@ public class UniqueTurn {
     //Contructors
     public UniqueTurn() { }
 
-    public UniqueTurn(Long turnId, Event event, UserEntity user, Date turnDate, int turnStatus, String keyValue) {
+    public UniqueTurn(Long turnId, Event event, UserEntity user, Date turnDate, boolean turnStatus, String keyValue) {
         this.turnId = turnId;
         this.event = event;
         this.user = user;
@@ -82,11 +85,11 @@ public class UniqueTurn {
         this.turnDate = turnDate;
     }
 
-    public int getTurnStatus() {
+    public boolean getTurnStatus() {
         return turnStatus;
     }
 
-    public void setTurnStatus(int turnStatus) {
+    public void setTurnStatus(boolean turnStatus) {
         this.turnStatus = turnStatus;
     }
 
