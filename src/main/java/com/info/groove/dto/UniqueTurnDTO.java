@@ -1,46 +1,40 @@
-package com.info.groove.entity;
+package com.info.groove.dto;
 
-import javax.persistence.*;
+import com.info.groove.entity.Event;
+import com.info.groove.entity.UserEntity;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
-@Entity(name = "unique_event_turns")
-public class UniqueEventTurn {
+public class UniqueTurnDTO {
+
 
     //Attributes
-    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "turn_id")
+    @NotNull(message = "Id cannot be null")
     private Long turnId;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "event_id")
-    @NotNull(message = "Cannot be null")
+    @NotNull(message = "Event Cannot be null")
     private Event event;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    @NotNull(message = "Cannot be null")
+    @NotNull(message = "User Cannot be null")
     private UserEntity user;
 
-    @Column(name = "turn_date")
-    @NotNull(message = "Cannot be null")
+    @NotNull(message = "Date Cannot be null")
     private Date turnDate;
 
-    @Column(name = "turn_status")
-    @NotNull(message = "Cannot be null")
+    @NotNull(message = "Status Cannot be null")
     @Pattern(regexp = "^[0,1]$")
     private int turnStatus;
 
-    @Column(name = "key_value")
-    @NotNull(message = "Cannot be null")
+    @NotNull(message = "Key Cannot be null")
     private String keyValue;
 
     //Contructors
-    public UniqueEventTurn() { }
+    public UniqueTurnDTO() {
+    }
 
-    public UniqueEventTurn(Long turnId, Event event, UserEntity user, Date turnDate, int turnStatus, String keyValue) {
+    public UniqueTurnDTO(Long turnId, Event event, UserEntity user, Date turnDate, int turnStatus, String keyValue) {
         this.turnId = turnId;
         this.event = event;
         this.user = user;
@@ -97,4 +91,5 @@ public class UniqueEventTurn {
     public void setKeyValue(String keyValue) {
         this.keyValue = keyValue;
     }
+
 }

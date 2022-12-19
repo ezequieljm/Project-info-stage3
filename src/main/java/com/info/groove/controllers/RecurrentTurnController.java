@@ -1,9 +1,9 @@
 package com.info.groove.controllers;
 
 
-import com.info.groove.dto.RecurrentEventTurnDTO;
-import com.info.groove.entity.RecurrentEventTurn;
-import com.info.groove.service.turns.recurrentturns.IRecurrentEventTurnService;
+import com.info.groove.dto.RecurrentTurnDTO;
+import com.info.groove.entity.RecurrentTurn;
+import com.info.groove.service.turns.recurrentturns.IRecurrentTurnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(RecurrentEventTurnController.BASIS)
-public class RecurrentEventTurnController {
-    public static final String BASIS = "/turns";
+@RequestMapping(RecurrentTurnController.BASIS)
+public class RecurrentTurnController {
+    public static final String BASIS = "/recurrent-turn";
 
     @Autowired
-    private IRecurrentEventTurnService recurrentEventTurnService;
+    private IRecurrentTurnService recurrentTurnService;
 
     @GetMapping
     public String helloRecurrentEvents() {
@@ -31,7 +31,7 @@ public class RecurrentEventTurnController {
             @PathVariable Long orgId
     ) {
         Map<String,Object> response = new HashMap<String,Object>();
-        List<RecurrentEventTurn> turns = recurrentEventTurnService.searchAllTurnsByOrganization(orgId, true);
+        List<RecurrentTurn> turns = recurrentTurnService.searchAllTurnsByOrganization(orgId);
         response.put("Turns list", turns);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
@@ -42,50 +42,49 @@ public class RecurrentEventTurnController {
             @PathVariable Long eventId
     ) {
         Map<String,Object> response = new HashMap<String,Object>();
-        List<RecurrentEventTurn> turns = recurrentEventTurnService.searchAllTurnByOrgAndEvent(orgId, eventId);
+        List<RecurrentTurn> turns = recurrentTurnService.searchAllTurnByOrgAndEvent(orgId, eventId);
         response.put("Turns list", turns);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/")
+    @PostMapping(value = "/register")
     public ResponseEntity<Map<String,Object>> registerTurn(
-            @RequestBody RecurrentEventTurnDTO turnDto
+            @RequestBody RecurrentTurnDTO turnDto
     ) {
         Map<String,Object> response = new HashMap<String,Object>();
-        RecurrentEventTurnDTO turn = recurrentEventTurnService.save(turnDto);
+        RecurrentTurnDTO turn = recurrentTurnService.register(turnDto);
         response.put("Stored Turn", turn);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
-    @PutMapping(value = "/update/{key}")
+    @PutMapping(value = "/update")
     public ResponseEntity<Map<String,Object>> updateTurn(
-            @RequestBody RecurrentEventTurnDTO turnDto,
-            @PathVariable String key
+            @RequestBody RecurrentTurnDTO turnDto
     ) {
         Map<String,Object> response = new HashMap<String,Object>();
-        RecurrentEventTurnDTO turn = recurrentEventTurnService.updateRecurrentEventTurn(turnDto,key);
+        RecurrentTurnDTO turn = recurrentTurnService.update(turnDto);
         response.put("Updated Turn", turn);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 
-//    @DeleteMapping(value = "/{id}")
-//    public ResponseEntity<Map<String,Object>> deleteTurn(@PathVariable Long id) {
-//        Map<String,Object> response = new HashMap<String,Object>();
-//        recurrentEventTurnService.deleteRecurrentEventTurn(id);
-//        response.put("Updated Turn", null);
-//        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
-//    }
-
-
     // Logical deletion
-    @PutMapping(value = "/delete/{id}/{orgKey}")
-    public ResponseEntity<Map<String,Object>> deleteTurn(
-            @PathVariable Long id,
-            @PathVariable String key
+    @PutMapping(value = "/delete")
+    public ResponseEntity<Map<String,Object>> logicalDeletionTurn(
+            @RequestBody RecurrentTurnDTO turnDto
     ) {
         Map<String,Object> response = new HashMap<String,Object>();
-        RecurrentEventTurnDTO turn = recurrentEventTurnService.deleteRecurrentEventTurn(id,key);
+        RecurrentTurnDTO turn = recurrentTurnService.logicalDeletion(turnDto);
         response.put("Updated Turn", turn);
+        return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Map<String,Object>> deleteTurn(
+            @RequestBody RecurrentTurnDTO turnDto
+    ) {
+        Map<String,Object> response = new HashMap<String,Object>();
+        recurrentTurnService.delete(turnDto);
+        response.put("Updated Turn", null);
         return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
     }
 }

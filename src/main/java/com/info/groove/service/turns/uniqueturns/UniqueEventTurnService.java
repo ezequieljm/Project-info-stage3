@@ -1,13 +1,13 @@
 package com.info.groove.service.turns.uniqueturns;
 
-import com.info.groove.dto.UniqueEventTurnDTO;
+import com.info.groove.dto.UniqueTurnDTO;
 import com.info.groove.entity.Organization;
-import com.info.groove.entity.UniqueEventTurn;
+import com.info.groove.entity.UniqueTurn;
 import com.info.groove.exceptions.*;
-import com.info.groove.mapper.UniqueEventTurnMapper;
+import com.info.groove.mapper.UniqueTurnMapper;
 import com.info.groove.repository.IEventRepository;
 import com.info.groove.repository.IOrganizationRepository;
-import com.info.groove.repository.IUniqueEventTurnRepository;
+import com.info.groove.repository.IUniqueTurnRepository;
 import com.info.groove.repository.IUserEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class UniqueEventTurnService implements IUniqueEventTurnService {
 
     @Autowired
-    private IUniqueEventTurnRepository uniqueEventTurnRepository;
+    private IUniqueTurnRepository uniqueEventTurnRepository;
 
     @Autowired
     private IEventRepository eventRepository;
@@ -33,12 +33,12 @@ public class UniqueEventTurnService implements IUniqueEventTurnService {
     private IOrganizationRepository organizationRepository;
 
     @Override
-    public UniqueEventTurnDTO registerUniqueTurn(UniqueEventTurnDTO uniqueEventTurnDTO, String orgKey)
+    public UniqueTurnDTO registerUniqueTurn(UniqueTurnDTO uniqueTurnDTO, String orgKey)
             throws UserNotFoundException, OrganizationNotFoundException, EventNotFoundException,
             OrganizationKeyNotEqual {
 
         // We convert the dto to entity
-        UniqueEventTurn turn = UniqueEventTurnMapper.dtoToEntity(uniqueEventTurnDTO);
+        UniqueTurn turn = UniqueTurnMapper.dtoToEntity(uniqueTurnDTO);
 
         // We verify if user, organization and event exists
         Long userId = turn.getUser().getUserId();
@@ -63,18 +63,18 @@ public class UniqueEventTurnService implements IUniqueEventTurnService {
         if (!key.equals(orgKey)) throw new OrganizationKeyNotEqual("The keys are not same");
 
         // we register the new turn
-        UniqueEventTurn storedTurn = uniqueEventTurnRepository.save(turn);
+        UniqueTurn storedTurn = uniqueEventTurnRepository.save(turn);
 
-        return UniqueEventTurnMapper.entityToDto(storedTurn);
+        return UniqueTurnMapper.entityToDto(storedTurn);
 
     }
 
     @Override
-    public UniqueEventTurnDTO updateUniqueTurn(UniqueEventTurnDTO uniqueEventTurnDTO, String orgKey)
+    public UniqueTurnDTO updateUniqueTurn(UniqueTurnDTO uniqueTurnDTO, String orgKey)
             throws UserNotFoundException, OrganizationNotFoundException, EventNotFoundException,
             OrganizationKeyNotEqual, TurnNofFoundException {
         // We convert the dto to entity
-        UniqueEventTurn turn = UniqueEventTurnMapper.dtoToEntity(uniqueEventTurnDTO);
+        UniqueTurn turn = UniqueTurnMapper.dtoToEntity(uniqueTurnDTO);
 
         // We verify if user, organization and event exists
         Long turnId = turn.getTurnId();
@@ -108,45 +108,45 @@ public class UniqueEventTurnService implements IUniqueEventTurnService {
         if (!key.equals(orgKey)) throw new OrganizationKeyNotEqual("The keys are not same");
 
         // we register the new turn
-        UniqueEventTurn storedTurn = uniqueEventTurnRepository.save(turn);
+        UniqueTurn storedTurn = uniqueEventTurnRepository.save(turn);
 
-        return UniqueEventTurnMapper.entityToDto(storedTurn);
+        return UniqueTurnMapper.entityToDto(storedTurn);
     }
 
     @Override
-    public UniqueEventTurnDTO deleteUniqueTurn(Long turnId, String orgKey) throws TurnNofFoundException, OrganizationKeyNotEqual {
+    public UniqueTurnDTO deleteUniqueTurn(Long turnId, String orgKey) throws TurnNofFoundException, OrganizationKeyNotEqual {
         // We control that the turn and organization are already regitered.
         // We search the turn and organization
-        Optional<UniqueEventTurn> maybeTurn = uniqueEventTurnRepository.findById(turnId);
+        Optional<UniqueTurn> maybeTurn = uniqueEventTurnRepository.findById(turnId);
         if (!maybeTurn.isEmpty())throw new TurnNofFoundException("Turn cannot be delete because it does not exists");
 
 //        uniqueEventTurnRepository
 //                .findById(turnId)
 //                .orElseThrow(() -> new TurnNofFoundException("Turn cannot be delete because it does not exists"));
 
-        UniqueEventTurn originalTurn = maybeTurn.get();
+        UniqueTurn originalTurn = maybeTurn.get();
         String key = originalTurn.getEvent().getOrganization().getOrgKey();
         if (!key.equals(orgKey)) throw new OrganizationKeyNotEqual("The keys are not same");
 
 
         // If the turn exists we delete it
         originalTurn.setTurnStatus(0);
-        UniqueEventTurn aTurn = uniqueEventTurnRepository.save(originalTurn);
-        return UniqueEventTurnMapper.entityToDto(aTurn);
+        UniqueTurn aTurn = uniqueEventTurnRepository.save(originalTurn);
+        return UniqueTurnMapper.entityToDto(aTurn);
 
     }
 
     @Override
-    public List<UniqueEventTurn> searchAllUniqueTurnByOrg(String orgKey) throws OrganizationNotFoundException {
+    public List<UniqueTurn> searchAllUniqueTurnByOrg(String orgKey) throws OrganizationNotFoundException {
         // We verify if organization exists
         Organization org = organizationRepository.findByOrgKey(orgKey);
         if (org == null) throw new OrganizationNotFoundException("the organization not exists");
 
         // We get all turns
-        List<UniqueEventTurn> turns = uniqueEventTurnRepository.findAll();
+        List<UniqueTurn> turns = uniqueEventTurnRepository.findAll();
 
         // Filter by active status and organization key
-        List<UniqueEventTurn> activeTurns = turns
+        List<UniqueTurn> activeTurns = turns
                 .stream()
                 .filter(t -> t.getTurnStatus() == 1)
                 .collect(Collectors.toList());
@@ -163,7 +163,7 @@ public class UniqueEventTurnService implements IUniqueEventTurnService {
     }
 
     @Override
-    public List<UniqueEventTurn> searchAllUniqueTurnsByOrgAndEvent(Long eventId, String orgKey)
+    public List<UniqueTurn> searchAllUniqueTurnsByOrgAndEvent(Long eventId, String orgKey)
             throws EventNotFoundException, OrganizationNotFoundException {
 
         // We verify if event and organization exists
@@ -175,17 +175,17 @@ public class UniqueEventTurnService implements IUniqueEventTurnService {
                 .orElseThrow(() -> new EventNotFoundException("The event not exists"));
 
         // We get all turns
-        List<UniqueEventTurn> turns = uniqueEventTurnRepository.findAll();
+        List<UniqueTurn> turns = uniqueEventTurnRepository.findAll();
 
         // Filter by active status and organization key
-        List<UniqueEventTurn> activeTurns = turns
+        List<UniqueTurn> activeTurns = turns
                 .stream()
                 .filter(t -> t.getTurnStatus() == 1)
                 .collect(Collectors.toList());
 
-        List<UniqueEventTurn> turnsWithOrgAndEvent = new ArrayList<UniqueEventTurn>();
+        List<UniqueTurn> turnsWithOrgAndEvent = new ArrayList<UniqueTurn>();
 
-        for (UniqueEventTurn turn: activeTurns) {
+        for (UniqueTurn turn: activeTurns) {
             Long turnEventId = turn.getEvent().getEventId();
             String turnOrgKey = turn.getEvent().getOrganization().getOrgKey();
             if (turnEventId.equals(eventId) && turnOrgKey.equals(orgKey)) turnsWithOrgAndEvent.add(turn);

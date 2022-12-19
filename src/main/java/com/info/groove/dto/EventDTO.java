@@ -1,7 +1,6 @@
 package com.info.groove.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serial;
@@ -25,7 +24,6 @@ public class EventDTO implements Serializable {
     private boolean eventStatus;
 
     @NotNull(message = "Date cannot be null")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime creationDate;
 

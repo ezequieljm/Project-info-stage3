@@ -1,38 +1,41 @@
 package com.info.groove.dto;
 
-import com.info.groove.entity.Event;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.info.groove.entity.UserEntity;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Date;
 
-public class RecurrentEventTurnDTO {
+public class RecurrentTurnDTO implements Serializable {
 
-
+    @Serial
+    private static final long serialVersionUID = 1L;
     // Attrubuttes
     @NotNull
     private Long turnId;
 
     @NotNull(message = "Cannot be null")
-    private Event event;
+    private EventDTO event;
 
     @NotNull(message = "Cannot be null")
-    private UserEntity user;
+    private UserEntityDTO user;
 
     @NotNull(message = "Cannot be null")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date turnDateTime;
 
     @NotNull(message = "Cannot be null")
-    @Pattern(regexp = "^[0,1]$")
-    private int turnStatus;
+    private boolean turnStatus;
 
 
 
     // Contructors
-    public RecurrentEventTurnDTO() { }
+    public RecurrentTurnDTO() { }
 
-    public RecurrentEventTurnDTO(Long turnId, Event event, UserEntity user, Date turnDateTime, int turnStatus) {
+    public RecurrentTurnDTO(Long turnId, EventDTO event, UserEntityDTO user, Date turnDateTime, boolean turnStatus) {
         this.turnId = turnId;
         this.event = event;
         this.user = user;
@@ -52,19 +55,19 @@ public class RecurrentEventTurnDTO {
         this.turnId = turnId;
     }
 
-    public Event getEvent() {
+    public EventDTO getEvent() {
         return event;
     }
 
-    public void setEvent(Event event) {
+    public void setEvent(EventDTO event) {
         this.event = event;
     }
 
-    public UserEntity getUser() {
+    public UserEntityDTO getUser() {
         return user;
     }
 
-    public void setUser(UserEntity user) {
+    public void setUser(UserEntityDTO user) {
         this.user = user;
     }
 
@@ -76,11 +79,11 @@ public class RecurrentEventTurnDTO {
         this.turnDateTime = turnDateTime;
     }
 
-    public int getTurnStatus() {
+    public boolean getTurnStatus() {
         return turnStatus;
     }
 
-    public void setTurnStatus(int turnStatus) {
+    public void setTurnStatus(boolean turnStatus) {
         this.turnStatus = turnStatus;
     }
 }
